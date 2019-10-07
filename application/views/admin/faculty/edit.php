@@ -51,7 +51,7 @@
                         </div>
                         <div class="ml-auto d-flex no-block align-items-center">
                             <div class="dl">
-                                <a href="<?= base_url('course/add/'.$faculty['id'])?>" class="btn btn-primary">Add Course</a>
+                                <a href="<?= base_url('course/create/'.$faculty['id'])?>" class="btn btn-primary">Add Course</a>
                             </div>
                         </div>
                     </div>
