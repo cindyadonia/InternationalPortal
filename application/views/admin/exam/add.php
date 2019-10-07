@@ -12,7 +12,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">New Midterm Exam</h4>
+                    <h4 class="card-title">New Exam Schedule</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
                     <form class="form" action="<?= base_url('examschedule/store/'.$student_id)?>" method="POST">
                         <div class="form-group mt-4 row">
