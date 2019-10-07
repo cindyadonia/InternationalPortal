@@ -22,7 +22,7 @@ class Student extends CI_Controller
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/students/index', $data);
+		$this->load->view('admin/student/index', $data);
 		$this->load->view('layouts/footer');
     }
 
@@ -35,7 +35,7 @@ class Student extends CI_Controller
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/students/add', $data);
+		$this->load->view('admin/student/add', $data);
 		$this->load->view('layouts/footer');
     }
 
@@ -73,7 +73,7 @@ class Student extends CI_Controller
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/students/edit', $data);
+		$this->load->view('admin/student/edit', $data);
 		$this->load->view('layouts/footer');
 	}
 	
