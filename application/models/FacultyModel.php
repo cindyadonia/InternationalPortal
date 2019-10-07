@@ -36,7 +36,7 @@ class FacultyModel extends CI_Model
             'id' => $id
         );
 
-        $this->db->update('faculties',$schedule,$where);
+        $this->db->update('faculties',$faculty,$where);
         if($this->db->trans_status() === TRUE)
         {
             // redirect('student/show/'.$student_id);

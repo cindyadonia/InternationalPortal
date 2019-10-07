@@ -36,16 +36,14 @@ class Faculty extends CI_Controller
 
     public function store()
 	{
-        $this->form_validation->set_rules('title', 'Title', 'required|trim');
-        $this->form_validation->set_rules('content', 'Content', 'required|trim');
-        $this->form_validation->set_rules('category', 'News Category', 'required|trim');
-		$this->form_validation->set_rules('user_id', 'Author', 'required|trim');
+        $this->form_validation->set_rules('code', 'Faculty Code', 'required|trim');
+        $this->form_validation->set_rules('name', 'Faculty Name', 'required|trim');
 
 		if($this->form_validation->run() == FALSE){
 			$this->create();
         }
 		else {
-			$this->FacultyModel->addNews();
+			$this->FacultyModel->addFaculty();
 			$this->index();
         }
 	}
@@ -54,7 +52,7 @@ class Faculty extends CI_Controller
     {
         $data['title'] = 'Edit News';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-		$data['news'] = $this->FacultyModel->getNews($id);
+		$data['faculty'] = $this->FacultyModel->getFaculty($id);
 
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
@@ -65,21 +63,20 @@ class Faculty extends CI_Controller
 	
 	public function update($id)
 	{
-		$this->form_validation->set_rules('title', 'Title', 'required|trim');
-        $this->form_validation->set_rules('content', 'Content', 'required|trim');
-        $this->form_validation->set_rules('category', 'News Category', 'required|trim');
+        $this->form_validation->set_rules('code', 'Faculty Code', 'required|trim');
+        $this->form_validation->set_rules('name', 'Faculty Name', 'required|trim');
 		
 		if($this->form_validation->run() == FALSE){
 			$this->show($id);
         }
 		else {
-			$this->FacultyModel->updateNews($id);
+			$this->FacultyModel->updateFaculty($id);
         }
 	}
 
 	public function destroy($id)
 	{
-		$this->FacultyModel->deleteNews($id);
+		$this->FacultyModel->deleteFaculty($id);
 		// $this->db->update('student')
 	}
 }
