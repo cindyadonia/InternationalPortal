@@ -17,7 +17,7 @@ class ExamSchedule extends CI_Controller
 
     public function create($student_id)
     {
-		$data['title'] = 'Add New Midterm Exam';
+		$data['title'] = 'Add New Exam Schedule';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
         $data['student_id'] = $student_id;
         $data['subjects'] = $this->TimeTableModel->selectSchedule($student_id);
@@ -25,7 +25,7 @@ class ExamSchedule extends CI_Controller
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/midterm/add', $data);
+		$this->load->view('admin/exam/add', $data);
 		$this->load->view('layouts/footer');
     }
 
@@ -52,17 +52,17 @@ class ExamSchedule extends CI_Controller
 
     public function show($student_id, $id)
     {
-        $data['title'] = 'Edit Midterm';
+        $data['title'] = 'Edit Exam Schedule';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
         $data['student'] = $this->db->select('*')->from('students')->where('id',$id)->get()->row_array();
-        $data['midterm'] = $this->ExamScheduleModel->getExamSchedule($id);
+        $data['exam'] = $this->ExamScheduleModel->getExamSchedule($id);
         $data['subjects'] = $this->TimeTableModel->selectSchedule($student_id);
 
         
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/midterm/edit', $data);
+		$this->load->view('admin/exam/edit', $data);
 		$this->load->view('layouts/footer');
 	}
 	

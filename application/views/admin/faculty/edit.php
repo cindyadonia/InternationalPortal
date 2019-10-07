@@ -8,6 +8,7 @@
 </div>
 <!-- Container fluid  -->
 <div class="container-fluid">
+    <!-- Faculty Info -->
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -34,6 +35,48 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faculty's Courses -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <div>
+                            <h4 class="card-title">Courses for <?= $faculty['name'] ?></h4>
+                        </div>
+                        <div class="ml-auto d-flex no-block align-items-center">
+                            <div class="dl">
+                                <a href="<?= base_url('course/add/'.$faculty['id'])?>" class="btn btn-primary">Add Course</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table no-wrap v-middle">
+                            <thead>
+                                <tr class="border-0">
+                                    <th class="border-0">Code</th>
+                                    <th class="border-0">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($courses as $course):?>
+                                <tr>
+                                    <td><?= $course['code'];?></td>
+                                    <td><?= $course['name'];?></td>
+                                    <td>
+                                        <a href="<?= base_url('course/show/'.$course['id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="" data-course-id="<?= $course['id'];?>" data-toggle="modal" data-target="#deleteCourse"  class="btn btn-danger btnDelCourse" name="btnDelCourse">Delete</a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
