@@ -54,7 +54,18 @@ class NewsModel extends CI_Model
 
     public function deleteNews($id)
     {
-        echo $id;die;
+        $data = array(
+            'deleted_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'id' => $id
+        );
+
+        $this->db->update('news',$data, $where);
+        if($this->db->trans_status() === TRUE){
+            redirect('news/index');
+        }
     }
 }
 ?>

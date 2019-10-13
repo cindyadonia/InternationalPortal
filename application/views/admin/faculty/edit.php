@@ -70,7 +70,7 @@
                                     <td><?= $course['name'];?></td>
                                     <td>
                                         <a href="<?= base_url('course/show/'.$course['id'])?>" class="btn btn-primary">Edit</a>
-                                        <a href="" data-course-id="<?= $course['id'];?>" data-toggle="modal" data-target="#deleteCourse"  class="btn btn-danger btnDelCourse" name="btnDelCourse">Delete</a>
+                                        <a href="" data-course-id="<?= $course['id'];?>" data-faculty_id="<?= $faculty['id']?>" data-toggle="modal" data-target="#deleteCourse"  class="btn btn-danger btnDelCourse" name="btnDelCourse">Delete</a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
@@ -82,4 +82,36 @@
         </div>
     </div>
 </div>
+<!-- SoftDelete Course - Modal -->
+<div id="deleteCourse" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="vcenter">Delete Course</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <h4>You are going to delete this course.</h4>
+                <p>Are you sure you want to delete this course?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-danger" id="target-delete-button">Delete</a>
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
+
+<script src="<?= base_url('assets');?>/libs/jquery/dist/jquery.min.js"></script>
+
+<script>
+    $('.btnDelCourse').click(function() {
+        var id = $(this).attr("data-course-id");
+        var faculty_id = $(this).attr("data-faculty_id");
+        var link = "<?= base_url('course/destroy/') ?>";
+        $('#target-delete-button').attr("href", link+id+'/'+faculty_id);
+    });
+</script>

@@ -51,10 +51,20 @@ class CourseModel extends CI_Model
         }
     }
 
-    public function deleteCourse($id)
+    public function deleteCourse($id, $faculty_id)
     {
-        echo "Belum bisa woi. masalah pop up";
-        echo $id;die;
+        $data = array(
+            'deleted_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'id' => $id
+        );
+
+        $this->db->update('courses',$data, $where);
+        if($this->db->trans_status() === TRUE){
+            redirect('faculty/show/'.$faculty_id);
+        }
     }
 }
 ?>

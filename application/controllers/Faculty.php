@@ -90,6 +90,5 @@ class Faculty extends CI_Controller
 	public function destroy($id)
 	{
 		$this->FacultyModel->deleteFaculty($id);
-		// $this->db->update('student')
 	}
 }

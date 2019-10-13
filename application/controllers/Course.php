@@ -79,9 +79,8 @@ class Course extends CI_Controller
 	        }
 	}
 
-	public function destroy($id)
+	public function destroy($id, $faculty_id)
 	{
-		$this->CourseModel->deleteCourse($id);
-		// $this->db->update('student')
+		$this->CourseModel->deleteCourse($id, $faculty_id);
 	}
 }

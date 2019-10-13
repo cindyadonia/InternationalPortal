@@ -149,7 +149,7 @@
                                     <td><?= $schedule['credits'];?></td>
                                     <td>
                                         <a href="<?= base_url('timetable/show/'.$schedule['id'])?>" class="btn btn-primary">Edit</a>
-                                        <a href="" data-schedule-id="<?= $schedule['id'];?>" data-toggle="modal" data-target="#deleteStudent"  class="btn btn-danger btnDelSchedule" name="btnDelSchedule">Delete</a>
+                                        <a href="" data-schedule-id="<?= $schedule['id'];?>" data-student-id="<?=$student['id']?>" data-toggle="modal" data-target="#deleteSchedule"  class="btn btn-danger btnDelSchedule" name="btnDelSchedule">Delete</a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
@@ -205,7 +205,7 @@
                                     <td><?= $midterm['table_no'];?></td>
                                     <td>
                                         <a href="<?= base_url('examschedule/show/'.$student['id'].'/'.$midterm['mid_id'])?>" class="btn btn-primary">Edit</a>
-                                        <a href="" data-midterm-id="<?= $midterm['mid_id'];?>" data-toggle="modal" data-target="#deleteStudent"  class="btn btn-danger btnDelMidterm" name="btnDelMidterm">Delete</a>
+                                        <a href="" data-midterm-id="<?= $midterm['mid_id'];?>" data-student-id="<?=$student['id']?>" data-toggle="modal" data-target="#deleteExamSchedule"  class="btn btn-danger btnDelExamSchedule" name="btnDelExamSchedule">Delete</a>
                                         <!-- onclick="return confirm('Are you sure you want to delete this student?')" -->
                                     </td>
                                 </tr>
@@ -242,7 +242,7 @@
                                     <td><?= $final['table_no'];?></td>
                                     <td>
                                         <a href="<?= base_url('examschedule/show/'.$student['id'].'/'.$final['mid_id'])?>" class="btn btn-primary">Edit</a>
-                                        <a href="" data-midterm-id="<?= $final['mid_id'];?>" data-toggle="modal" data-target="#deleteStudent"  class="btn btn-danger btnDelMidterm" name="btnDelMidterm">Delete</a>
+                                        <a href="" data-midterm-id="<?= $final['mid_id'];?>" data-toggle="modal" data-target="#deleteExamSchedule"  class="btn btn-danger btnDelExamSchedule" name="btnDelExamSchedule">Delete</a>
                                         <!-- onclick="return confirm('Are you sure you want to delete this student?')" -->
                                     </td>
                                 </tr>
@@ -279,8 +279,8 @@
         <!-- /.modal-dialog -->
     </div>
 
-    <!-- SoftDelete Midterm - Modal -->
-    <div id="deleteMidterm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+    <!-- SoftDelete ExamSchedule - Modal -->
+    <div id="deleteExamSchedule" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -304,17 +304,20 @@
 
 
 </div>
+<script src="<?= base_url('assets');?>/libs/jquery/dist/jquery.min.js"></script>
 
 <script>
     $('.btnDelSchedule').click(function() {
         var id = $(this).attr("data-schedule-id");
+        var student_id = $(this).attr("data-student-id");
         var link = "<?= base_url('timetable/destroy/') ?>";
-        $('#target-delete-schedule').attr("href", link+id);
+        $('#target-delete-schedule').attr("href", link+id+'/'+student_id);
     });
 
-    $('.btnDelMidterm').click(function() {
+    $('.btnDelExamSchedule').click(function() {
         var id = $(this).attr("data-midterm-id");
+        var student_id = $(this).attr("data-student-id");
         var link = "<?= base_url('examschedule/destroy/') ?>";
-        $('#target-delete-midterm').attr("href", link+id);
+        $('#target-delete-midterm').attr("href", link+id+'/'+student_id);
     });
 </script>

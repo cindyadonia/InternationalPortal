@@ -89,7 +89,6 @@ class News extends CI_Controller
 	public function destroy($id)
 	{
 		$this->NewsModel->deleteNews($id);
-		// $this->db->update('student')
 	}
 
 	// private function uploadFile()

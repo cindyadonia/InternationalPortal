@@ -101,9 +101,8 @@ class TimeTable extends CI_Controller
         }
 	}
 
-	public function destroy($id)
+	public function destroy($id, $student_id)
 	{
-		echo $id;die;
-		// $this->db->update('student')
+		$this->TimeTableModel->deleteSchedule($id, $student_id);
 	}
 }

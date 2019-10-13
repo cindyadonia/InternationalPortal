@@ -4,7 +4,7 @@ class TimeTableModel extends CI_Model
 {
     public function getSchedules($student_id)
     {
-        return $this->db->select("id, class, name, lecturer, credits, CONCAT(day,', ',location,' (',start_time,' - ',end_time,')') as `timeandlocation`")->from('student_schedules')->where('student_id',$student_id)->get()->result_array();
+        return $this->db->select("id, class, name, lecturer, credits, CONCAT(day,', ',location,' (',start_time,' - ',end_time,')') as `timeandlocation`")->from('student_schedules')->where('student_id',$student_id)->where('deleted_at', NULL)->get()->result_array();
     }
 
     public function getSchedule($id)
@@ -73,10 +73,20 @@ class TimeTableModel extends CI_Model
         return $this->db->select("id, CONCAT(class, ' - ', name) as subject")->from('student_schedules')->where('student_id',$student_id)->get()->result_array();
     }
 
-    // public function deleteStudent($id)
-    // {
-    //     echo "Belum bisa woi. masalah pop up";
-    //     echo $id;die;
-    // }
+    public function deleteSchedule($id, $student_id)
+    {
+        $data = array(
+            'deleted_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'id' => $id
+        );
+
+        $this->db->update('student_schedules',$data, $where);
+        if($this->db->trans_status() === TRUE){
+            redirect('student/show/'.$student_id);
+        }
+    }
 }
 ?>

@@ -112,6 +112,5 @@ class Student extends CI_Controller
 	public function destroy($id)
 	{
 		$this->StudentModel->deleteStudent($id);
-		// $this->db->update('student')
 	}
 }

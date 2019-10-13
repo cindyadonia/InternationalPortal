@@ -4,7 +4,7 @@ class StudentModel extends CI_Model
 {
     public function getStudents()
     {
-        return $this->db->select('students.*, courses.name AS `course_name`')->from('students')->join('courses', 'students.course_id = courses.id')->where('deleted_at',NULL)->get()->result_array();
+        return $this->db->select('students.*, courses.name AS `course_name`')->from('students')->join('courses', 'students.course_id = courses.id')->where('students.deleted_at',NULL)->get()->result_array();
     }
 
     public function addStudent()
@@ -84,8 +84,18 @@ class StudentModel extends CI_Model
 
     public function deleteStudent($id)
     {
-        // echo "Belum bisa woi. masalah pop up";
-        echo $id;die;
+        $data = array(
+            'deleted_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'id' => $id
+        );
+
+        $this->db->update('students',$data, $where);
+        if($this->db->trans_status() === TRUE){
+            redirect('student/index');
+        }
     }
 }
 ?>

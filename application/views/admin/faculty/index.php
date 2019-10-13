@@ -44,7 +44,7 @@
 </div>
 <!-- End Container fluid  -->
 
-<!-- SoftDelete Student - Modal -->
+<!-- SoftDelete Faculty - Modal -->
 <div id="deleteFaculty" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

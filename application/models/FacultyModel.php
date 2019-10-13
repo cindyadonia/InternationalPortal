@@ -48,8 +48,18 @@ class FacultyModel extends CI_Model
 
     public function deleteFaculty($id)
     {
-        echo "Belum bisa woi. masalah pop up";
-        echo $id;die;
+        $data = array(
+            'deleted_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'id' => $id
+        );
+
+        $this->db->update('faculties',$data, $where);
+        if($this->db->trans_status() === TRUE){
+            redirect('faculty/index');
+        }
     }
 }
 ?>
