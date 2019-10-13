@@ -18,6 +18,7 @@ class FacultyModel extends CI_Model
         $faculty = [
             'code' => $this->input->post('code'),
             'name' => $this->input->post('name'),
+            'created_at' => date('Y-m-d H:i:s'),
         ];
 
         return $this->db->insert('faculties', $faculty);

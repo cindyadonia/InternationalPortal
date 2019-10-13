@@ -9,7 +9,7 @@ class CourseModel extends CI_Model
 
     public function getCoursesByFaculty($faculty_id)
     {
-        return $this->db->select('*')->from('courses')->where('faculty_id', $faculty_id)->get()->result_array();
+        return $this->db->select('*')->from('courses')->where('faculty_id', $faculty_id)->where('deleted_at', NULL)->get()->result_array();
     }
 
     public function getCoursesById($id)
@@ -23,7 +23,8 @@ class CourseModel extends CI_Model
         $course = [
             'code' => $this->input->post('code'),
             'name' => $this->input->post('name'),
-            'faculty_id' => $faculty_id
+            'faculty_id' => $faculty_id,
+            'created_at' => date('Y-m-d H:i:s'),
         ];
 
         return $this->db->insert('courses', $course);

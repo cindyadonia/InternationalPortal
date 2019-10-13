@@ -22,7 +22,7 @@ class ExamScheduleModel extends CI_Model
             'start_time' => $this->input->post('start_time'),
             'end_time' => $this->input->post('end_time'),
             'exam_type' => $this->input->post('exam_type'),
-
+            'created_at' => date('Y-m-d H:i:s'),
             'student_schedule_id' => $this->input->post('subject'),
         ];
 
