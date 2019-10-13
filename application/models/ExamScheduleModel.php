@@ -58,7 +58,7 @@ class ExamScheduleModel extends CI_Model
         if($this->db->trans_status() === TRUE)
         {
             // redirect('student/show/'.$student_id);
-            redirect('student/index');
+            redirect('admin/student/index');
 
         }
     }
@@ -75,7 +75,7 @@ class ExamScheduleModel extends CI_Model
 
         $this->db->update('exam_schedules',$data, $where);
         if($this->db->trans_status() === TRUE){
-            redirect('student/show/'.$student_id);
+            redirect('admin/student/show/'.$student_id);
         }
     }
 }

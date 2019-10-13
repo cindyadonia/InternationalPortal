@@ -41,7 +41,7 @@ class FacultyModel extends CI_Model
         if($this->db->trans_status() === TRUE)
         {
             // redirect('student/show/'.$student_id);
-            redirect('faculty/index');
+            redirect('admin/faculty/index');
 
         }
     }
@@ -58,7 +58,7 @@ class FacultyModel extends CI_Model
 
         $this->db->update('faculties',$data, $where);
         if($this->db->trans_status() === TRUE){
-            redirect('faculty/index');
+            redirect('admin/faculty/index');
         }
     }
 }

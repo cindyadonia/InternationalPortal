@@ -46,7 +46,7 @@ class CourseModel extends CI_Model
         $this->db->update('courses',$course,$where);
         if($this->db->trans_status() === TRUE)
         {
-            redirect('faculty/index');
+            redirect('admin/faculty/index');
 
         }
     }
@@ -63,7 +63,7 @@ class CourseModel extends CI_Model
 
         $this->db->update('courses',$data, $where);
         if($this->db->trans_status() === TRUE){
-            redirect('faculty/show/'.$faculty_id);
+            redirect('admin/faculty/show/'.$faculty_id);
         }
     }
 }

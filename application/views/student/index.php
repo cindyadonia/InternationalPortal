@@ -1,32 +1,7 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets');?>/images/favicon.png">
-    <title><?= $title;?></title>
-    <!-- Custom CSS -->
-    <link href="<?= base_url('assets');?>/extra-libs/c3/c3.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="<?= base_url('assets');?>/css/style.min.css" rel="stylesheet">
-
-     <!-- This page plugin CSS -->
-     <link href="<?= base_url('assets');?>/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-    
-</head>
-
-<body>
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
-        <?= $this->session->flashdata('message');?>
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -45,6 +20,7 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+            <?= $this->session->flashdata('message');?>
                 <!-- ============================================================== -->
                 <!-- table -->
                 <!-- ============================================================== -->
@@ -768,52 +744,4 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-       All Rights Reserved by Xtreme. Developed by <a href="https://folxcode.com" target="_blank">Cindy Adonia</a>.
-</footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="<?= base_url('assets');?>/libs/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="<?= base_url('assets');?>/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="<?= base_url('assets');?>/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- apps -->
-    <script src="<?= base_url('assets');?>/js/app.min.js"></script>
-    <script src="<?= base_url('assets');?>/js/app.init.light-sidebar.js"></script>
-    <script src="<?= base_url('assets');?>/js/app-style-switcher.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="<?= base_url('assets');?>/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="<?= base_url('assets');?>/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <script src="<?= base_url('assets');?>/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="<?= base_url('assets');?>/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="<?= base_url('assets');?>/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <script src="<?= base_url('assets');?>/extra-libs/c3/d3.min.js"></script>
-    <script src="<?= base_url('assets');?>/extra-libs/c3/c3.min.js"></script>
-    <script src="<?= base_url('assets');?>/js/pages/dashboards/dashboard4.js"></script>
-
-    <!--This page plugins -->
-    <script src="<?= base_url('assets');?>/extra-libs/DataTables/datatables.min.js"></script>
-    <script src="<?= base_url('assets');?>/js/pages/datatable/datatable-basic.init.js"></script>
-</body>
-
-</html>
+            

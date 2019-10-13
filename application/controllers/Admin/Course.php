@@ -49,7 +49,7 @@ class Course extends CI_Controller
         }
 		else {
 			$this->CourseModel->addCourse($faculty_id);
-			redirect('faculty/show/'.$faculty_id);
+			redirect('admin/faculty/show/'.$faculty_id);
         }
 	}
 

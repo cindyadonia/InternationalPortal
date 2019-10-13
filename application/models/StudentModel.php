@@ -78,7 +78,7 @@ class StudentModel extends CI_Model
         $this->db->update('students',$student,$where);
         if($this->db->trans_status() === TRUE)
         {
-            redirect('student/index');
+            redirect('admin/student/index');
         }
     }
 
@@ -94,7 +94,7 @@ class StudentModel extends CI_Model
 
         $this->db->update('students',$data, $where);
         if($this->db->trans_status() === TRUE){
-            redirect('student/index');
+            redirect('admin/student/index');
         }
     }
 }

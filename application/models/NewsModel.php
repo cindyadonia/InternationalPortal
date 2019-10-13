@@ -48,7 +48,7 @@ class NewsModel extends CI_Model
         $this->db->update('news',$news,$where);
         if($this->db->trans_status() === TRUE)
         {
-            redirect('news/index');
+            redirect('admin/news/index');
         }
     }
 
@@ -64,7 +64,7 @@ class NewsModel extends CI_Model
 
         $this->db->update('news',$data, $where);
         if($this->db->trans_status() === TRUE){
-            redirect('news/index');
+            redirect('admin/news/index');
         }
     }
 }

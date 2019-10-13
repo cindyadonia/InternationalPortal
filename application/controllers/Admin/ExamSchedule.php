@@ -56,7 +56,7 @@ class ExamSchedule extends CI_Controller
         
 		else {
 			$this->ExamScheduleModel->addExamSchedule();
-			redirect('student/show/'.$student_id);
+			redirect('admin/student/show/'.$student_id);
         }
 	}
 
