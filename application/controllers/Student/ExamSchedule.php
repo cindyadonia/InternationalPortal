@@ -8,7 +8,7 @@ class ExamSchedule extends CI_Controller
 		parent::__construct();
 		if($_SESSION['role_id'] == '1'){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
-			redirect(base_url('IsStudent'));
+			redirect(base_url('IsAdmin'));
 		}
 		else if(!isset($_SESSION['role_id']) || ($_SESSION['role_id'] != '2' && $_SESSION['role_id'] !='1') ){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
