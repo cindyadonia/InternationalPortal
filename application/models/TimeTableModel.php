@@ -65,7 +65,7 @@ class TimeTableModel extends CI_Model
 
     public function totalCredits($id)
     {
-        return $this->db->select("SUM(credits) as `totalcredit` ")->from('student_schedules')->where('student_id', $id)->get()->row_array();
+        return $this->db->select("SUM(credits) as `totalcredit` ")->from('student_schedules')->where('student_id', $id)->where('deleted_at',NULL)->get()->row_array();
     }
 
     public function selectSchedule($student_id)

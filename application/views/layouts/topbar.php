@@ -48,7 +48,6 @@
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-right">
-                        INI HARDCODE.
                     </ul>
                 </div>
             </nav>

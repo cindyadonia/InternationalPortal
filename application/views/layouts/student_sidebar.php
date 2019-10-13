@@ -31,20 +31,9 @@
 
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('IsStudent')?>" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">International Students </span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="<?= base_url('student/index');?>" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> List of Students </span></a></li>
-                        <li class="sidebar-item"><a href="<?= base_url('student/create');?>" class="sidebar-link"><i class="mdi mdi-account-plus"></i><span class="hide-menu"> Add Student </span></a></li>
-                    </ul>
-                </li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('student/timetable/index')?>" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Time Table</span></a></li>
 
-                <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Time Table</span></a>
-                    <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="mdi mdi-calendar-range"></i><span class="hide-menu">Time Table</span></a></li>
-                        <li class="sidebar-item"><a href="index.html" class="sidebar-link"><i class="mdi mdi-book-variant"></i><span class="hide-menu">Exams Schedule</span></a></li>
-                    </ul>
-                </li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('student/examschedule/index')?>" aria-expanded="false"><i class="mdi mdi-book-variant"></i><span class="hide-menu">Exam Schedule</span></a></li>
                 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-inbox-arrow-down"></i><span class="hide-menu">Inbox </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
@@ -55,7 +44,7 @@
                     </ul>
                 </li>
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Extra</span></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../docs/documentation.html" aria-expanded="false"><i class="mdi mdi-content-paste"></i><span class="hide-menu">Documentation</span></a></li>
+                <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../docs/documentation.html" aria-expanded="false"><i class="mdi mdi-content-paste"></i><span class="hide-menu">Documentation</span></a></li> -->
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -63,5 +52,5 @@
     <!-- End Sidebar scroll-->
 </aside>
 <!-- ============================================================== -->
-<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- End Left Sidebar -->
 <!-- ============================================================== -->
