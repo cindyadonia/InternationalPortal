@@ -54,9 +54,12 @@ class News extends CI_Controller
 			$this->create();
         }
 		else {
-			$this->uploadFile();die;
-			$this->NewsModel->addNews();
-			$this->index();
+			$filename = $this->uploadFile($_FILES);
+			if($filename !== false)
+			{
+				$this->NewsModel->addNews($filename);
+				$this->index();
+			}
         }
 	}
 	
@@ -91,28 +94,26 @@ class News extends CI_Controller
 		$this->NewsModel->deleteNews($id);
 	}
 
-	// private function uploadFile()
-	// {
-	// 	$file['upload_path']          = './uploads/news';
-	// 	$file['allowed_types']        = 'jpg|jpeg|png';
-	// 	$file['max_size']             = 1024000;
-	// 	$file['max_width']            = 1024;
-	// 	$file['max_height']           = 1024;
+	private function uploadFile($file)
+	{
+		$file['upload_path']          = './uploads/news';
+		$file['allowed_types']        = 'jpg|jpeg|png';
+		$file['file_name']            = date('d-m-Y_h-i-s_').uniqid(rand(),true).'-'.$file['file_path']['name'];
+		$file['max_size']             = 2048;
+		$file['max_width']            = 1024;
+		$file['max_height']           = 1024;
 		
-	// 	$this->load->library('upload', $file);
+		$this->load->library('upload', $file);
 		
-	// 	if ( !$this->upload->initialize($file))
-	// 	// if ( !$this->uploadFile())
-	// 	{
-	// 		$error = array('error' => $this->upload->display_errors());
-	// 		$this->load->view('upload_form', $error);
-	// 		echo "fail";die;
-	// 	}
-	// 	else
-	// 	{
-	// 		$data = array('upload_data' => $this->upload->data());
-	// 		echo "oke";die;
-	// 	}
-	// 	echo "done";die;
-	// }
+		if (!$this->upload->do_upload('file_path'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			return false;
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			return $file['file_name'];
+		}
+	}
 }

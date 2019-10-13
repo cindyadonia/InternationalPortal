@@ -14,12 +14,12 @@
                 <div class="card-body">
                     <h4 class="card-title">News Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('news/store')?>" method="POST" enctype="multipart/form-data">
+                    <?php echo form_open_multipart('news/store');?>
                     <input type="hidden" name="user_id" value="<?= $this->session->userdata('id')?>">
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Author</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="username" name="username" value="<?= $user['name']?>" readonly>
+                                <input class="form-control" type="text" id="username" name="username" value="<?= $this->session->userdata('name')?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -49,7 +49,7 @@
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Image</label>
                             <div class="col-10">
-                                <input type="file" id="file_path" name="file_path">
+                                <input type="file" id="file_path" name="file_path" size="1000">
                             </div>
                         </div>
                         <div class="form-group row">

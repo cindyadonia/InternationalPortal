@@ -19,7 +19,7 @@
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Author</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="username" name="username" value="<?= $user['name']?>" readonly>
+                                <input class="form-control" type="text" id="username" name="username" value="<?= $news['author']?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">

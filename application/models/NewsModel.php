@@ -7,12 +7,12 @@ class NewsModel extends CI_Model
         return $this->db->select('news.*, admins.name AS `author`')->from('news')->join('admins', 'admins.id = news.user_id')->where('news.deleted_at',NULL)->get()->result_array();
     }
 
-    public function addNews()
+    public function addNews($filename)
     {
         $news = [
             'title' => $this->input->post('title'),
             'content' => $this->input->post('content'),
-            'file_path' => $this->input->post('file_path'),
+            'file_path' => $filename,
             'category' => $this->input->post('category'),
             'created_at' => date('Y-m-d H:i:s'),
             'user_id' => $this->input->post('user_id'),
