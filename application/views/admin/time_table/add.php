@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-title">New Subject Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('timetable/store/'.$student_id)?>" method="POST">
+                    <form class="form" action="<?= base_url('admin/timetable/store/'.$student_id)?>" method="POST">
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Subject</label>
                             <div class="col-10">

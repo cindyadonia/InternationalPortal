@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Faculty Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('faculty/update/'.$faculty['id'])?>" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="<?= base_url('admin/faculty/update/'.$faculty['id'])?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Faculty Code</label>
                             <div class="col-10">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="ml-auto d-flex no-block align-items-center">
                             <div class="dl">
-                                <a href="<?= base_url('course/create/'.$faculty['id'])?>" class="btn btn-primary">Add Course</a>
+                                <a href="<?= base_url('admin/course/create/'.$faculty['id'])?>" class="btn btn-primary">Add Course</a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                     <td><?= $course['code'];?></td>
                                     <td><?= $course['name'];?></td>
                                     <td>
-                                        <a href="<?= base_url('course/show/'.$course['id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('admin/course/show/'.$course['id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-course-id="<?= $course['id'];?>" data-faculty_id="<?= $faculty['id']?>" data-toggle="modal" data-target="#deleteCourse"  class="btn btn-danger btnDelCourse" name="btnDelCourse">Delete</a>
                                     </td>
                                 </tr>
@@ -111,7 +111,7 @@
     $('.btnDelCourse').click(function() {
         var id = $(this).attr("data-course-id");
         var faculty_id = $(this).attr("data-faculty_id");
-        var link = "<?= base_url('course/destroy/') ?>";
+        var link = "<?= base_url('admin/course/destroy/') ?>";
         $('#target-delete-button').attr("href", link+id+'/'+faculty_id);
     });
 </script>

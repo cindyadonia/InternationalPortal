@@ -33,22 +33,22 @@
 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu">News</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="<?= base_url('news/index');?>" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu"> List of News </span></a></li>
-                        <li class="sidebar-item"><a href="<?= base_url('news/create');?>" class="sidebar-link"><i class="mdi mdi-plus"></i><span class="hide-menu"> Add News </span></a></li>
+                        <li class="sidebar-item"><a href="<?= base_url('admin/news/index');?>" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu"> List of News </span></a></li>
+                        <li class="sidebar-item"><a href="<?= base_url('admin/news/create');?>" class="sidebar-link"><i class="mdi mdi-plus"></i><span class="hide-menu"> Add News </span></a></li>
                     </ul>
                 </li>
                 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">International Students </span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="<?= base_url('student/index');?>" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> List of Students </span></a></li>
-                        <li class="sidebar-item"><a href="<?= base_url('student/create');?>" class="sidebar-link"><i class="mdi mdi-account-plus"></i><span class="hide-menu"> Add Student </span></a></li>
+                        <li class="sidebar-item"><a href="<?= base_url('admin/student/index');?>" class="sidebar-link"><i class="mdi mdi-account-multiple"></i><span class="hide-menu"> List of Students </span></a></li>
+                        <li class="sidebar-item"><a href="<?= base_url('admin/student/create');?>" class="sidebar-link"><i class="mdi mdi-account-plus"></i><span class="hide-menu"> Add Student </span></a></li>
                     </ul>
                 </li>
 
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-school"></i><span class="hide-menu">Faculty</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
-                        <li class="sidebar-item"><a href="<?= base_url('faculty/index');?>" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu"> List of Faculty </span></a></li>
-                        <li class="sidebar-item"><a href="<?= base_url('faculty/create');?>" class="sidebar-link"><i class="mdi mdi-plus"></i><span class="hide-menu"> Add Faculty </span></a></li>
+                        <li class="sidebar-item"><a href="<?= base_url('admin/faculty/index');?>" class="sidebar-link"><i class="mdi mdi-view-list"></i><span class="hide-menu"> List of Faculty </span></a></li>
+                        <li class="sidebar-item"><a href="<?= base_url('admin/faculty/create');?>" class="sidebar-link"><i class="mdi mdi-plus"></i><span class="hide-menu"> Add Faculty </span></a></li>
                     </ul>
                 </li>
 

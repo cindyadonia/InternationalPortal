@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Edit Exam Schedule</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('examschedule/update/'.$exam['id'])?>" method="POST">
+                    <form class="form" action="<?= base_url('admin/examschedule/update/'.$exam['id'])?>" method="POST">
                         <div class="form-group mt-4 row">
                             <label for="example-month-input2" class="col-2 col-form-label">Subject</label>
                             <div class="col-10">

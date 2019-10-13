@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Student Informations</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('student/update/'.$student['id'])?>" method="POST">
+                    <form class="form" action="<?= base_url('admin/student/update/'.$student['id'])?>" method="POST">
                         <input type="hidden" name="id" value="<?= $student['id'];?>">
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Student No</label>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="ml-auto d-flex no-block align-items-center">
                             <div class="dl">
-                                <a href="<?= base_url('timetable/create/'.$student['id'])?>" class="btn btn-primary">Add Subject</a>
+                                <a href="<?= base_url('admin/timetable/create/'.$student['id'])?>" class="btn btn-primary">Add Subject</a>
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                                     <td><?= $schedule['lecturer'];?></td>
                                     <td><?= $schedule['credits'];?></td>
                                     <td>
-                                        <a href="<?= base_url('timetable/show/'.$schedule['id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('admin/timetable/show/'.$schedule['id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-schedule-id="<?= $schedule['id'];?>" data-student-id="<?=$student['id']?>" data-toggle="modal" data-target="#deleteSchedule"  class="btn btn-danger btnDelSchedule" name="btnDelSchedule">Delete</a>
                                     </td>
                                 </tr>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="ml-auto d-flex no-block align-items-center">
                             <div class="dl">
-                                <a href="<?= base_url('examschedule/create/'.$student['id'])?>" class="btn btn-primary">Add Exam Schedule</a>
+                                <a href="<?= base_url('admin/examschedule/create/'.$student['id'])?>" class="btn btn-primary">Add Exam Schedule</a>
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                                     <td><?= $midterm['timeandlocation'];?></td>
                                     <td><?= $midterm['table_no'];?></td>
                                     <td>
-                                        <a href="<?= base_url('examschedule/show/'.$student['id'].'/'.$midterm['mid_id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('admin/examschedule/show/'.$student['id'].'/'.$midterm['mid_id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-midterm-id="<?= $midterm['mid_id'];?>" data-student-id="<?=$student['id']?>" data-toggle="modal" data-target="#deleteExamSchedule"  class="btn btn-danger btnDelExamSchedule" name="btnDelExamSchedule">Delete</a>
                                         <!-- onclick="return confirm('Are you sure you want to delete this student?')" -->
                                     </td>
@@ -241,7 +241,7 @@
                                     <td><?= $final['timeandlocation'];?></td>
                                     <td><?= $final['table_no'];?></td>
                                     <td>
-                                        <a href="<?= base_url('examschedule/show/'.$student['id'].'/'.$final['mid_id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('admin/examschedule/show/'.$student['id'].'/'.$final['mid_id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-midterm-id="<?= $final['mid_id'];?>" data-toggle="modal" data-target="#deleteExamSchedule"  class="btn btn-danger btnDelExamSchedule" name="btnDelExamSchedule">Delete</a>
                                         <!-- onclick="return confirm('Are you sure you want to delete this student?')" -->
                                     </td>
@@ -310,14 +310,14 @@
     $('.btnDelSchedule').click(function() {
         var id = $(this).attr("data-schedule-id");
         var student_id = $(this).attr("data-student-id");
-        var link = "<?= base_url('timetable/destroy/') ?>";
+        var link = "<?= base_url('admin/timetable/destroy/') ?>";
         $('#target-delete-schedule').attr("href", link+id+'/'+student_id);
     });
 
     $('.btnDelExamSchedule').click(function() {
         var id = $(this).attr("data-midterm-id");
         var student_id = $(this).attr("data-student-id");
-        var link = "<?= base_url('examschedule/destroy/') ?>";
+        var link = "<?= base_url('admin/examschedule/destroy/') ?>";
         $('#target-delete-midterm').attr("href", link+id+'/'+student_id);
     });
 </script>

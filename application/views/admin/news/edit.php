@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-title">News Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('news/update/'.$news['id'])?>" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="<?= base_url('admin/news/update/'.$news['id'])?>" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="user_id" value="<?= $this->session->userdata('id')?>">
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Author</label>

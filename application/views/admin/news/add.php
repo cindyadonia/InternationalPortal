@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-title">News Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <?php echo form_open_multipart('news/store');?>
+                    <?php echo form_open_multipart('admin/news/store');?>
                     <input type="hidden" name="user_id" value="<?= $this->session->userdata('id')?>">
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Author</label>
