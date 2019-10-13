@@ -69,6 +69,7 @@ class Auth extends CI_Controller
 								'id' => $user['id'],
 								'name' => $query['name'],
 								'admin_no' => $user['admin_no'],
+								'role_id' => $user['role_id']
 							];
 							$this->session->set_userdata($data);
 							redirect('IsAdmin');
@@ -80,6 +81,7 @@ class Auth extends CI_Controller
 								'id' => $user['id'],
 								'name' => $query['name'],
 								'student_no' => $user['student_no'],
+								'role_id' => $user['role_id']
 							];
 							
 							$this->session->set_userdata($data);

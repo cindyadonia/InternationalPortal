@@ -11,20 +11,21 @@ class IsAdmin extends CI_Controller
 	
 	public function index()
 	{
-		// $data['title'] = 'Dashboard';
-		// $data['user'] = $this->db->select('name, admin_no')->from('admins')->join('users', 'admins.user_id = users.id')->where('users.username',$this->session->userdata('username'))->get()->row_array();
-		// $this->load->view('layouts/header', $data);
-		// $this->load->view('layouts/admin_sidebar', $data);
-		// $this->load->view('layouts/topbar', $data);
-		// $this->load->view('admin/index', $data);
-		// $this->load->view('layouts/footer');
-
-		$data['title'] = 'Dashboard';
-		$data['user'] = $this->db->select('id, name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-		$this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/index', $data);
-		$this->load->view('layouts/footer');
+		if($_SESSION['role_id'] == '2'){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
+			redirect(base_url('IsStudent'));
+		}
+		else if(!isset($_SESSION['role_id']) || $_SESSION['role_id'] != '2' || $_SESSION['role_id'] !='1' ){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
+			redirect(base_url());
+		}
+		else{
+			$data['title'] = 'Dashboard';
+			$this->load->view('layouts/header', $data);
+			$this->load->view('layouts/admin_sidebar', $data);
+			$this->load->view('layouts/topbar', $data);
+			$this->load->view('admin/index', $data);
+			$this->load->view('layouts/footer');
+		}
 	}
 }
