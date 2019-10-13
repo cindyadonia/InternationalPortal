@@ -54,11 +54,11 @@
 									<button class="btn btn-block btn-lg btn-info" type="submit">Log In</button>
 								</div>
 							</div>
-							<div class="form-group m-b-0 m-t-10">
+							<!-- <div class="form-group m-b-0 m-t-10">
 								<div class="col-sm-12 text-center">
 									Don't have an account? <a href="authentication-register1.html" class="text-info m-l-5"><b>Sign Up</b></a>
 								</div>
-							</div>
+							</div> -->
 						</form>
 					</div>
 				</div>
