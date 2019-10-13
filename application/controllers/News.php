@@ -6,14 +6,25 @@ class News extends CI_Controller
     public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('form_validation');
-		$this->load->model('NewsModel');
+		if($_SESSION['role_id'] == '2'){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
+			redirect(base_url('IsStudent'));
+		}
+		else if(!isset($_SESSION['role_id']) || ($_SESSION['role_id'] != '2' && $_SESSION['role_id'] !='1') ){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
+			redirect(base_url());
+		}
+		else{
+			$this->load->library('form_validation');
+			$this->load->model('NewsModel');
+	
+			$this->load->helper(array('form', 'url'));
+		}
     }
     
     public function index()
     {
 		$data['title'] = 'Dashboard';
-		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['newss'] = $this->NewsModel->getAllNews();
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
@@ -25,8 +36,6 @@ class News extends CI_Controller
     public function create()
     {
 		$data['title'] = 'Add News';
-		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
@@ -45,15 +54,15 @@ class News extends CI_Controller
 			$this->create();
         }
 		else {
+			$this->uploadFile();die;
 			$this->NewsModel->addNews();
 			$this->index();
         }
 	}
-
+	
     public function show($id)
     {
         $data['title'] = 'Edit News';
-		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['news'] = $this->NewsModel->getNews($id);
 
         $this->load->view('layouts/header', $data);
@@ -82,4 +91,29 @@ class News extends CI_Controller
 		$this->NewsModel->deleteNews($id);
 		// $this->db->update('student')
 	}
+
+	// private function uploadFile()
+	// {
+	// 	$file['upload_path']          = './uploads/news';
+	// 	$file['allowed_types']        = 'jpg|jpeg|png';
+	// 	$file['max_size']             = 1024000;
+	// 	$file['max_width']            = 1024;
+	// 	$file['max_height']           = 1024;
+		
+	// 	$this->load->library('upload', $file);
+		
+	// 	if ( !$this->upload->initialize($file))
+	// 	// if ( !$this->uploadFile())
+	// 	{
+	// 		$error = array('error' => $this->upload->display_errors());
+	// 		$this->load->view('upload_form', $error);
+	// 		echo "fail";die;
+	// 	}
+	// 	else
+	// 	{
+	// 		$data = array('upload_data' => $this->upload->data());
+	// 		echo "oke";die;
+	// 	}
+	// 	echo "done";die;
+	// }
 }

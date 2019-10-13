@@ -11,6 +11,8 @@ class IsAdmin extends CI_Controller
 	
 	public function index()
 	{
+		// var_dump($_SESSION['role_id']);die;
+
 		if($_SESSION['role_id'] == '2'){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Sorry, you are not allowed to access the page you are requested! </div>');
 			redirect(base_url('IsStudent'));
