@@ -1,9 +1,9 @@
-<!-- ============================================================== -->
+            <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-       All Rights Reserved by Xtreme. Developed by <a href="https://folxcode.com" target="_blank">Cindy Adonia</a>.
-</footer>
+                All Rights Reserved by Xtreme. Developed by <a href="https://folxcode.com" target="_blank">Cindy Adonia</a>.
+            </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->

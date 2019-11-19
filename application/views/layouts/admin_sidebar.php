@@ -51,7 +51,8 @@
                         <li class="sidebar-item"><a href="<?= base_url('admin/faculty/create');?>" class="sidebar-link"><i class="mdi mdi-plus"></i><span class="hide-menu"> Add Faculty </span></a></li>
                     </ul>
                 </li>
-
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('Message')?>" aria-expanded="false"><i class="mdi mdi-inbox-arrow-down"></i><span class="hide-menu">Message </span></a>
+                </li>
                 
 
                 <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Time Table</span></a>
