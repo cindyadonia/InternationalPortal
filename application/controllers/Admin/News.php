@@ -96,9 +96,11 @@ class News extends CI_Controller
 
 	private function uploadFile($file)
 	{
+		$namafile = $file['file_path']['name'];
+		$ext = explode(".",$namafile);
 		$file['upload_path']          = './uploads/news';
 		$file['allowed_types']        = 'jpg|jpeg|png';
-		$file['file_name']            = date('d-m-Y_h-i-s_').uniqid(rand(),true).'-'.$file['file_path']['name'];
+		$file['file_name']            = date('d_m_Y_h_i_s_').uniqid(true).'.'.$ext[count($ext)-1];
 		$file['max_size']             = 2048;
 		$file['max_width']            = 1024;
 		$file['max_height']           = 1024;
