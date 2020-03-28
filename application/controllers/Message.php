@@ -20,7 +20,7 @@ class Message extends CI_Controller
 		$id = $this->session->userdata('id');
 		$data['title'] = 'Message';
 		$data['recipients'] = $this->MessageModel->getUsers($_SESSION['role_id']);
-
+		
 		$this->load->view('layouts/header', $data);
 		if($_SESSION['role_id'] == 2){
 			$this->load->view('layouts/student_sidebar', $data);
@@ -32,41 +32,36 @@ class Message extends CI_Controller
 		$this->load->view('message/index', $data);
 	}
 
+	public function store()
+	{
+		$message = $_POST['message'];
+		$recipient_no = $_POST['recipient'];
+		$user_no = $this->session->userdata('user_no');
+		$role_id = $this->session->userdata('role_id');
+		if($this->MessageModel->sendMessage($message, $recipient_no, $user_no)){
+			return "OK";
+		};
+	}
+
 	public function showChat($recipient_id)
 	{
 		$user_no = $this->session->userdata('user_no');
 		$role_id = $this->session->userdata('role_id');
 
-		$data['title'] = 'Message';
 		$data['recipients'] = $this->MessageModel->getUsers($_SESSION['role_id']);
 		$data['chats'] = $this->MessageModel->getMessage($user_no, $recipient_id, $role_id);
 		$data['receiver'] = $this->MessageModel->getRecipient($recipient_id, $role_id);
-
-
-		$this->load->view('layouts/header', $data);
-		if($_SESSION['role_id'] == 2){
-			$this->load->view('layouts/student_sidebar', $data);
-		}
-		if($_SESSION['role_id'] == 1){
-			$this->load->view('layouts/admin_sidebar', $data);
-		}
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('message/view', $data);
+		echo json_encode($data);
 	}
 
-	public function store()
+	public function newMessage($recipient_id, $lastID)
 	{
-		$this->form_validation->set_rules('admin_id', ' Admin Id', 'required|trim');
-		$this->form_validation->set_rules('student_id', 'Student Id', 'required|trim');
-        $this->form_validation->set_rules('message', 'Message', 'required|trim');
-		
+		$user_no = $this->session->userdata('user_no');
+		$role_id = $this->session->userdata('role_id');
 
-		if($this->form_validation->run() == FALSE){
-			$this->create();
-        }
-		else {
-			$this->CourseModel->addCourse($faculty_id);
-			redirect('admin/faculty/show/'.$faculty_id);
-        }
+		$data['recipients'] = $this->MessageModel->getUsers($_SESSION['role_id']);
+		$data['new_chats'] = $this->MessageModel->getNewMessage($user_no, $recipient_id, $role_id, $lastID);
+		$data['receiver'] = $this->MessageModel->getRecipient($recipient_id, $role_id);
+		echo json_encode($data);
 	}
 }
