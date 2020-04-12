@@ -54,15 +54,8 @@ class MessageModel extends CI_Model
         }
     }
 
-    public function sendMessage($message, $recipient_no, $user_no)
+    public function sendMessage($data)
     {
-        $data = [
-            'content' => $message,
-            // 'file_path' => $this->input->post('file_path'),
-            'sender_no' => $user_no,
-            'receiver_no' => $recipient_no,
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
         return $this->db->insert('messages', $data);
     }
 

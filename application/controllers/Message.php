@@ -12,6 +12,7 @@ class Message extends CI_Controller
 		}
 		else{
 			$this->load->model('MessageModel');
+			$this->load->helper(array('form', 'url'));
 		}
     }
 
@@ -34,13 +35,38 @@ class Message extends CI_Controller
 
 	public function store()
 	{
-		$message = $_POST['message'];
-		$recipient_no = $_POST['recipient'];
-		$user_no = $this->session->userdata('user_no');
-		$role_id = $this->session->userdata('role_id');
-		if($this->MessageModel->sendMessage($message, $recipient_no, $user_no)){
-			return "OK";
-		};
+		try {
+			$message = $_POST['message'] ? $_POST['message'] : "";
+			$recipient_no = $_POST['recipient'];
+			$user_no = $this->session->userdata('user_no');
+			$role_id = $this->session->userdata('role_id');
+			$filename = "";
+			
+			if($_FILES) {
+				$filename = $this->uploadFile($_FILES);
+				if(!$filename){
+					$result = [
+						'message' => 'Failed to upload your file!'
+					];
+					return json_encode($result);
+				}
+			}
+			
+			$data = [
+				'content' => $message,
+				'file_path' => $filename,
+				'sender_no' => $user_no,
+				'receiver_no' => $recipient_no,
+				'created_at' => date('Y-m-d H:i:s'),
+			];
+			
+			if($this->MessageModel->sendMessage($data)){
+				return json_encode(array("status" => "OK", "message" => "FIle successfully uploaded!"));
+			};
+		}
+		catch (Exception $e) {
+			var_dump($e);die;
+		}
 	}
 
 	public function showChat($recipient_id)
@@ -63,5 +89,35 @@ class Message extends CI_Controller
 		$data['new_chats'] = $this->MessageModel->getNewMessage($user_no, $recipient_id, $role_id, $lastID);
 		$data['receiver'] = $this->MessageModel->getRecipient($recipient_id, $role_id);
 		echo json_encode($data);
+	}
+
+	private function uploadFile($file)
+	{
+		$namafile = $file['file_path']['name'];
+		$ext = explode(".",$namafile);
+		$file['upload_path']          = './uploads/file';
+		$file['allowed_types']        = 'pdf|doc|docx|xlsx|xls|png|jpg|jpeg';
+		$file['file_name']            = date('d_m_Y_h_i_s_').uniqid(true).'.'.$ext[count($ext)-1];
+		$file['max_size']             = 2048;
+		
+		$this->load->library('upload', $file);
+		
+		if (!$this->upload->do_upload('file_path'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			return false;
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			return $file['file_name'];
+		}
+	}
+
+	public function download($filename)
+	{
+		$this->load->helper('download');
+		$data = file_get_contents(base_url('/uploads/file/'.$filename));
+		force_download($filename, $data);
 	}
 }

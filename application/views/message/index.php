@@ -36,7 +36,16 @@
         </div>
 
     </div>
-        
+
+    <div style="display: none;">
+        <form action="<?php echo base_url("Message/store/"); ?>" method="POST" enctype="multipart/form-data" id="uploadFileForm">
+            <input type="file" name="file_path" id="chooseFile">
+            <input type="hidden" name="recipient" id="file-recipient-no">
+            <input type="text" name="message" id="file-message">
+            <button type="submit" name="asd" value="enter" id="uploadFileSubmitButton">Submit button</button>
+        </form>
+    </div>
+
     <script src="<?= base_url('assets');?>/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?= base_url('assets');?>/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -61,22 +70,9 @@
 
     <!--This page JavaScript -->
     <script>
-
-        // $(function() {
-        //     $(document).on('keypress', "#textarea1", function(e) {
-        //         if (e.keyCode == 13) {
-        //             var id = $(this).attr("data-user-id");
-        //             var msg = $(this).val();
-        //             msg = msg_sent(msg);
-        //             $("#someDiv").append(msg);
-        //             $(this).val("");
-        //             $(this).focus();
-        //         }
-        //     });
-        // });
-
         $('.get-chat-box').on('click',function(){
 			var recipient_no = $(this).attr('recipient-no');
+            $('#file-recipient-no').val(recipient_no);
             $.ajax({
                 type:'POST',
                 url:'<?php echo base_url("Message/showChat/"); ?>' + recipient_no,
@@ -97,7 +93,11 @@
 						{
 							html += "<li class='odd chat-item' data-id='" + jsonObject.chats[i].id + "'>";
 							html += "<div class='chat-content'>";
-							html += "<div class='box bg-light-inverse'>" + jsonObject.chats[i].content + "</div>";
+                            if (jsonObject.chats[i].file_path) {
+                                html += "<div class='box bg-light-inverse'>File has been sent. <a style='color:Yellow' href='<?php echo base_url()?>Message/download/" + jsonObject.chats[i].file_path+ "'>Download here</a></div>";
+                            } else {
+							    html += "<div class='box bg-light-inverse'>" + jsonObject.chats[i].content + "</div>";
+                            }
 							html += "</div>";
 							html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at).toString().slice(16,21); + "</div>";
 							html += "</li>";
@@ -106,7 +106,11 @@
 						{
 							html += "<li class='chat-item' data-id='" + jsonObject.chats[i].id + "'>";
 							html += "<div class='chat-content'>";
-							html += "<div class='box bg-light-info'>" + jsonObject.chats[i].content + "</div>";
+                            if (jsonObject.chats[i].file_path) {
+                                html += "<div class='box bg-light-info'>File has been sent. <a href='<?php echo base_url()?>Message/download/" + jsonObject.chats[i].file_path+ "'>Download here</a></div>";
+                            } else {
+							    html += "<div class='box bg-light-info'>" + jsonObject.chats[i].content + "</div>";
+                            }
 							html += "</div>";
 							html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at).toString().slice(16,21); + "</div>";
 							html += "</li>";
@@ -123,6 +127,7 @@
 					html += "</div>";
 					html += "</div>";
 					html += "<div class='col-3'>";
+					html += "<a id='choose-file' class='btn-circle btn-lg btn-cyan float-right text-white'><i class='fas fa-paperclip'></i></a>";
 					html += "<a id='send-msg' class='btn-circle btn-lg btn-cyan float-right text-white' href='javascript:void(0)'><i class='fas fa-paper-plane'></i></a>";
                     html += "</div>";
                     html += "</div>";
@@ -138,6 +143,7 @@
                             document.getElementById("send-msg").click();
                         }
                     });
+
                     $('#send-msg').on('click', function(){			
                         var msg = $(this).parent().prev().children().children().val();
                         if(msg){
@@ -153,7 +159,7 @@
                                 }
                             });
                         }
-                    })
+                    });
                 }
             });
 
@@ -161,6 +167,31 @@
                 refreshChat(recipient_no);
             }, 2000);
     	});
+
+        $(document).ready(function() {
+            $(document).on("click", "#choose-file", function () {
+                $('#chooseFile').trigger('click');
+            });
+
+            $('#chooseFile').on('change', function(){
+                console.log("CHANGE");
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo base_url("Message/store/"); ?>",
+                    data: new FormData(document.getElementById("uploadFileForm")),
+                    dataType: 'json',
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+                        document.getElementById("uploadFileForm").reset();
+                    },
+                    error: function(e) {
+                        document.getElementById("uploadFileForm").reset();
+                    }
+                });
+            });
+        });
 
 
         function refreshChat(recipient_no)
