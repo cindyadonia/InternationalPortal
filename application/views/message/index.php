@@ -144,7 +144,7 @@
                             }
                         }
                         $('ul.chat-list').append(html);
-                        $('.chat-box.scrollable').scrollTop($('.chat-list').height());
+                        // $('.chat-box.scrollable').scrollTop($('.chat-list').height());
                     }
                 }); 
             }
