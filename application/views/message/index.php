@@ -104,7 +104,7 @@
             function refreshChat(recipient_no)
             {
                 console.log("Current recipient " +recipient_no);
-                var last_chat_id = $('ul.chat-list li:last-child').attr('data-id');
+                var last_chat_id = $('ul.chat-list li:last-child').attr('data-id') ? $('ul.chat-list li:last-child').attr('data-id') : 0
                 $.ajax({
                     type:'POST',
                     url:'<?php echo base_url("Message/newMessage/"); ?>' + recipient_no + "/" + last_chat_id,
