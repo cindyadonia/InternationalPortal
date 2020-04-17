@@ -86,24 +86,24 @@
                 var timer = false;
                 this.start = function () {
                     if (!this.isRunning())
-                        console.log("call start");
-                        console.log(fn, time);
+                        // console.log("call start");
+                        // console.log(fn, time);
                         timer = setInterval(fn, time);
                 };
                 this.stop = function () {
-                    console.log("call stop")
+                    // console.log("call stop")
                     clearInterval(timer);
                     timer = false;
                 };
                 this.isRunning = function () {
-                    console.log("Check is running");
+                    // console.log("Check is running");
                     return timer !== false;
                 };
             }
 
             function refreshChat(recipient_no)
             {
-                console.log(recipient_no);
+                console.log("Current recipient " +recipient_no);
                 var last_chat_id = $('ul.chat-list li:last-child').attr('data-id');
                 $.ajax({
                     type:'POST',
