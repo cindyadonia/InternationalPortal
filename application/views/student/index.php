@@ -40,7 +40,7 @@
                                     <h4 class="card-title"><?= $news['title']?></h4>
                                     <p class="text-secondary"><?= date('d M Y',strtotime($news['created_at']))?> by <?= $news['author']?></p>
                                     <p class="card-text text-justify"><?php echo substr($news['content'], 0, 500)?></p>
-                                    <a href="<?= base_url('student/UniversityNews/view/'.$news['id'])?>" class="btn btn-primary">Read More</a>
+                                    <a href="<?= base_url('Student/UniversityNews/view/'.$news['id'])?>" class="btn btn-primary">Read More</a>
                                 </div>
 
                             </div>

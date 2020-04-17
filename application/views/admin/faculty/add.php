@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Faculty Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('admin/faculty/store')?>" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="<?= base_url('Admin/Faculty/store')?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Faculty Code</label>
                             <div class="col-10">

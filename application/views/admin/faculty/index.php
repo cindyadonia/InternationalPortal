@@ -29,7 +29,7 @@
                                     <td><?= $faculty['code'];?></td>
                                     <td><?= $faculty['name'];?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/faculty/show/'.$faculty['id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('Admin/Faculty/show/'.$faculty['id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-faculty-id="<?= $faculty['id'];?>" data-toggle="modal" data-target="#deleteFaculty"  class="btn btn-danger btnDelFaculty" name="btnDelFaculty">Delete</a>
                                     </td>
                                 </tr>
@@ -73,7 +73,7 @@
 <script>
     $('.btnDelFaculty').click(function() {
         var id = $(this).attr("data-faculty-id");
-        var link = "<?= base_url('admin/faculty/destroy/') ?>";
+        var link = "<?= base_url('Admin/Faculty/destroy/') ?>";
         $('#target-delete-button').attr("href", link+id);
     });
 </script>

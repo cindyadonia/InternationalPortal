@@ -31,9 +31,9 @@
 
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('IsStudent')?>" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('student/timetable/index')?>" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Time Table</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('Student/TimeTable/index')?>" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Time Table</span></a></li>
 
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('student/examschedule/index')?>" aria-expanded="false"><i class="mdi mdi-book-variant"></i><span class="hide-menu">Exam Schedule</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= base_url('Student/ExamSchedule/index')?>" aria-expanded="false"><i class="mdi mdi-book-variant"></i><span class="hide-menu">Exam Schedule</span></a></li>
                 
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="<?= base_url('Message')?>" aria-expanded="false"><i class="mdi mdi-inbox-arrow-down"></i><span class="hide-menu">Message </span></a>
                 </li>

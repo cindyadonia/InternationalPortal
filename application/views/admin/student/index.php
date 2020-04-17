@@ -41,7 +41,7 @@
                                     <td><?= date('d M Y',strtotime($student['joined_at']));?></td>
                                     <td><?php if($student['is_active'] == 1){echo "Active";} else{echo "Not Active";}?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/student/show/'.$student['id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('Admin/Student/show/'.$student['id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-student-id="<?= $student['id'];?>" data-toggle="modal" data-target="#deleteStudent"  class="btn btn-danger btnDelStudent" name="btnDelStudent">Delete</a>
                                         <!-- onclick="return confirm('Are you sure you want to delete this student?')" -->
                                     </td>
@@ -86,7 +86,7 @@
 <script>
     $('.btnDelStudent').click(function() {
         var id = $(this).attr("data-student-id");
-        var link = "<?= base_url('admin/student/destroy/') ?>";
+        var link = "<?= base_url('Admin/Student/destroy/') ?>";
         $('#target-delete-button').attr("href", link+id);
     });
 </script>

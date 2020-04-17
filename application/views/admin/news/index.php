@@ -33,7 +33,7 @@
                                     <td><?= $news['author'];?></td>
                                     <td><?= $news['category'];?></td>
                                     <td>
-                                        <a href="<?= base_url('admin/news/show/'.$news['id'])?>" class="btn btn-primary">Edit</a>
+                                        <a href="<?= base_url('Admin/News/show/'.$news['id'])?>" class="btn btn-primary">Edit</a>
                                         <a href="" data-news-id="<?= $news['id'];?>" data-toggle="modal" data-target="#deleteNews"  class="btn btn-danger btnDelNews" name="btnDelNews">Delete</a>
                                     </td>
                                 </tr>
@@ -77,7 +77,7 @@
 <script>
     $('.btnDelNews').click(function() {
         var id = $(this).attr("data-news-id");
-        var link = "<?= base_url('admin/news/destroy/') ?>";
+        var link = "<?= base_url('Admin/News/destroy/') ?>";
         $('#target-delete-button').attr("href", link+id);
     });
 </script>
