@@ -103,7 +103,7 @@
 
             function refreshChat(recipient_no)
             {
-                console.log("Current recipient " +recipient_no);
+                // console.log("Current recipient " +recipient_no);
                 var last_chat_id = $('ul.chat-list li:last-child').attr('data-id') ? $('ul.chat-list li:last-child').attr('data-id') : 0
                 $.ajax({
                     type:'POST',
