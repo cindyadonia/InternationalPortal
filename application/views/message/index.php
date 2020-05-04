@@ -114,7 +114,7 @@
                         var html = "";
                         for (i = 0; i < jsonObject.new_chats.length; i++)
                         {
-                            if(jsonObject.new_chats[i].sender_no == <?= $this->session->userdata('user_no') ?>)
+                            if(jsonObject.new_chats[i].sender_no == "<?= $this->session->userdata('user_no') ?>")
                             {
                                 html += "<li class='odd chat-item' data-id='" + jsonObject.new_chats[i].id + "'>";
                                 html += "<div class='chat-content'>";
@@ -128,7 +128,7 @@
                                 html += "<div class='chat-time'>" +new Date(jsonObject.new_chats[i].created_at).toString().slice(16,21); + "</div>";
                                 html += "</li>";
                             }
-                            else if(jsonObject.new_chats[i].sender_no != <?= $this->session->userdata('user_no') ?>)
+                            else if(jsonObject.new_chats[i].sender_no != "<?= $this->session->userdata('user_no') ?>")
                             {
                                 html += "<li class='chat-item' data-id='" + jsonObject.new_chats[i].id + "'>";
                                 html += "<div class='chat-content'>";
@@ -166,7 +166,7 @@
                         html += "<ul class='chat-list'>";
                         for (i = 0; i < jsonObject.chats.length; i++)
                         {
-                            if(jsonObject.chats[i].sender_no == <?= $this->session->userdata('user_no') ?>)
+                            if(jsonObject.chats[i].sender_no == "<?= $this->session->userdata('user_no') ?>")
                             {
                                 html += "<li class='odd chat-item' data-id='" + jsonObject.chats[i].id + "'>";
                                 html += "<div class='chat-content'>";
@@ -179,7 +179,7 @@
                                 html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at).toString().slice(16,21); + "</div>";
                                 html += "</li>";
                             }
-                            else if(jsonObject.chats[i].sender_no != <?= $this->session->userdata('user_no') ?>)
+                            else if(jsonObject.chats[i].sender_no != "<?= $this->session->userdata('user_no') ?>")
                             {
                                 html += "<li class='chat-item' data-id='" + jsonObject.chats[i].id + "'>";
                                 html += "<div class='chat-content'>";
