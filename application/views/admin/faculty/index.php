@@ -2,7 +2,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">News</h4>
+            <h4 class="page-title">Faculty</h4>
         </div>
     </div>
 </div>
@@ -13,7 +13,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">List of News</h4>
+                    <h4 class="card-title">List of Faculty</h4>
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>
