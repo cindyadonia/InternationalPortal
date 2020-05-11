@@ -24,7 +24,7 @@ class TimeTable extends CI_Controller
     {	
 		$data['title'] = 'Dashboard';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-        $data['students'] = $this->db->select('students.*, courses.name AS `course_name`')->from('students')->join('courses', 'students.course_id = courses.id')->where('deleted_at',NULL)->get()->result_array();
+        $data['students'] = $this->db->select('students.*, study_programs.name AS `study_program_name`')->from('students')->join('study_programs', 'students.study_program_id = study_programs.id')->where('deleted_at',NULL)->get()->result_array();
         
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);

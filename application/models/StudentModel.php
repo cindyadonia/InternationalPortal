@@ -4,7 +4,7 @@ class StudentModel extends CI_Model
 {
     public function getStudents()
     {
-        return $this->db->select('students.*, courses.name AS `course_name`')->from('students')->join('courses', 'students.course_id = courses.id')->where('students.deleted_at',NULL)->get()->result_array();
+        return $this->db->select('students.*, study_programs.name AS `study_program_name`')->from('students')->join('study_programs', 'students.study_program_id = study_programs.id')->where('students.deleted_at',NULL)->get()->result_array();
     }
 
     public function addStudent()
@@ -20,7 +20,7 @@ class StudentModel extends CI_Model
             'joined_at' => $this->input->post('joined_at'),
             'password' => password_hash($this->input->post('student_no'), PASSWORD_DEFAULT),
             'created_at' => date('Y-m-d H:i:s'),
-            'course_id' => $this->input->post('course'),
+            'study_program_id' => $this->input->post('study_program'),
             'role_id' => 2,
         ];
         return $this->db->insert('students', $student);
@@ -43,7 +43,7 @@ class StudentModel extends CI_Model
         $is_active = $this->input->post('is_active');
         $joined_at = $this->input->post('joined_at');
         $password = $this->input->post('password');
-        $course = $this->input->post('course');
+        $study_program = $this->input->post('study_program');
 
         if($password !== "")
         {
@@ -66,7 +66,7 @@ class StudentModel extends CI_Model
             'nationality' => $nationality,
             'university_origin' => $university_origin,
             'semester' => $semester,
-            'course_id' => $course,
+            'study_program_id' => $study_program,
             'joined_at' => $joined_at,
             'is_active' => TRUE,
         );

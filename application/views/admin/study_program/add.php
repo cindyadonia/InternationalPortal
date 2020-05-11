@@ -2,7 +2,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-5 align-self-center">
-            <h4 class="page-title">Course</h4>
+            <h4 class="page-title">Study Program</h4>
         </div>
     </div>
 </div>
@@ -12,11 +12,11 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Course Form</h4>
+                    <h4 class="card-title">Study Program Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
-                    <form class="form" action="<?= base_url('Admin/Course/store/'.$faculty_id)?>" method="POST" enctype="multipart/form-data">
+                    <form class="form" action="<?= base_url('Admin/StudyProgram/store/'.$faculty_id)?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label for="example-datetime-local-input" class="col-2 col-form-label">Course Code</label>
+                            <label for="example-datetime-local-input" class="col-2 col-form-label">Study Program Code</label>
                             <div class="col-10">
                                 <input class="form-control" type="text" id="code" name="code" value="<?= set_value('code')?>" required>
                             </div>

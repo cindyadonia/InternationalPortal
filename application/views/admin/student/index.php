@@ -23,7 +23,7 @@
                                     <th>Birth Date</th>
                                     <th>Nationality</th>
                                     <th>University</th>
-                                    <th>Course</th>
+                                    <th>Study Program</th>
                                     <th>Joined On</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -37,7 +37,7 @@
                                     <td><?= date('d-M-Y',strtotime($student['birth_date']));?></td>
                                     <td><?= $student['nationality'];?></td>
                                     <td><?= $student['university_origin'];?></td>
-                                    <td><?= $student['course_name'];?></td>
+                                    <td><?= $student['study_program_name'];?></td>
                                     <td><?= date('d M Y',strtotime($student['joined_at']));?></td>
                                     <td><?php if($student['is_active'] == 1){echo "Active";} else{echo "Not Active";}?></td>
                                     <td>

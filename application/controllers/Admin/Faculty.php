@@ -17,7 +17,7 @@ class Faculty extends CI_Controller
 		else{
 			$this->load->library('form_validation');
 			$this->load->model('FacultyModel');
-			$this->load->model('CourseModel');
+			$this->load->model('StudyProgramModel');
 		}
 
     }
@@ -65,7 +65,7 @@ class Faculty extends CI_Controller
         $data['title'] = 'Edit News';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['faculty'] = $this->FacultyModel->getFaculty($id);
-		$data['courses'] = $this->CourseModel->getCoursesByFaculty($id);
+		$data['study_programs'] = $this->StudyProgramModel->getStudyProgramsByFaculty($id);
 
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);

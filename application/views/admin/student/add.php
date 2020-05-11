@@ -62,13 +62,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-month-input2" class="col-2 col-form-label">Course</label>
+                            <label for="example-month-input2" class="col-2 col-form-label">Study Program</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="course" name="course" value=<?= set_value('course')?>>
-                                    <option selected="">Choose Course...</option>
+                                <select class="custom-select col-12" id="study_program" name="study_program" value=<?= set_value('study_program')?>>
+                                    <option selected="">Choose Study Program...</option>
                                     <?php
-                                    foreach($courses as $course){ ?>
-                                    <option value="<?= $course['id']?>"><?= $course['name']?></option>
+                                    foreach($study_programs as $study_program){ ?>
+                                    <option value="<?= $study_program['id']?>"><?= $study_program['name']?></option>
                                     <?php } ?>
                                 </select>
                             </div>

@@ -63,12 +63,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-month-input2" class="col-2 col-form-label">Course</label>
+                            <label for="example-month-input2" class="col-2 col-form-label">Study Program</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="course" name="course" value=<?= set_value('course')?>>
+                                <select class="custom-select col-12" id="study_program" name="study_program" value=<?= set_value('study_program')?>>
                                     <?php
-                                    foreach($courses as $course){ ?>
-                                    <option value="<?= $course['id']?>" <?php if($student['course_id'] ==  $course['id'] ){ echo "selected";}else{}?>><?= $course['name']?></option>
+                                    foreach($study_programs as $study_program){ ?>
+                                    <option value="<?= $study_program['id']?>" <?php if($student['study_program_id'] ==  $study_program['id'] ){ echo "selected";}else{}?>><?= $study_program['name']?></option>
                                     <?php } ?>
                                 </select>
                             </div>

@@ -17,7 +17,7 @@ class Student extends CI_Controller
 		else{
 			$this->load->library('form_validation');
 			$this->load->model('StudentModel');
-			$this->load->model('CourseModel');
+			$this->load->model('StudyProgramModel');
 			$this->load->model('TimeTableModel');
 			$this->load->model('ExamScheduleModel');
 		}
@@ -39,7 +39,7 @@ class Student extends CI_Controller
     {
 		$data['title'] = 'Add New Student';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-		$data['courses'] = $this->CourseModel->getCourses();
+		$data['study_programs'] = $this->StudyProgramModel->getStudyPrograms();
 
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
@@ -56,7 +56,7 @@ class Student extends CI_Controller
         $this->form_validation->set_rules('nationality', 'Nationality', 'required|trim');
         $this->form_validation->set_rules('university_origin', 'University Origin', 'required|trim');
 		$this->form_validation->set_rules('semester', 'Semester', 'required|trim');
-        $this->form_validation->set_rules('course', 'Course', 'required|trim');
+        $this->form_validation->set_rules('study_program', 'StudyProgram', 'required|trim');
         $this->form_validation->set_rules('joined_at', 'Join date', 'required|trim');
 
 		if($this->form_validation->run() == FALSE){
@@ -73,7 +73,7 @@ class Student extends CI_Controller
         $data['title'] = 'Edit Student';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['student'] = $this->StudentModel->getStudent($id);
-		$data['courses'] = $this->CourseModel->getCourses();
+		$data['study_programs'] = $this->StudyProgramModel->getStudyPrograms();
 		$data['schedules'] = $this->TimeTableModel->getSchedules($id);
 		$data['totalcredit'] = $this->TimeTableModel->totalCredits($id);
 		$data['midterms'] = $this->ExamScheduleModel->getExamSchedules($id,$type=1);
