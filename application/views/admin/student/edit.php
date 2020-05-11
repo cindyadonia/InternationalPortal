@@ -14,6 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Student Informations</h4>
+                    <?= $this->session->flashdata('message');?>
                     <!-- <h5 class="card-subtitle"> </h5> -->
                     <form class="form" action="<?= base_url('Admin/Student/update/'.$student['id'])?>" method="POST">
                         <input type="hidden" name="id" value="<?= $student['id'];?>">
@@ -50,7 +51,7 @@
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Semester</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="semester" name="semester" value=<?= set_value('semester')?>>
+                                <select class="custom-select col-12" id="semester" name="semester" value="<?= set_value('semester')?>">
                                     <option value="1" <?php if($student['semester'] == 1 ){ echo "selected";}else{}?>>Semester One</option>
                                     <option value="2" <?php if($student['semester'] == 2 ){ echo "selected";}else{}?>>Semester Two</option>
                                     <option value="3" <?php if($student['semester'] == 3 ){ echo "selected";}else{}?>>Semester Three</option>
@@ -65,7 +66,7 @@
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Study Program</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="study_program" name="study_program" value=<?= set_value('study_program')?>>
+                                <select class="custom-select col-12" id="study_program" name="study_program" value="<?= set_value('study_program')?>">
                                     <?php
                                     foreach($study_programs as $study_program){ ?>
                                     <option value="<?= $study_program['id']?>" <?php if($student['study_program_id'] ==  $study_program['id'] ){ echo "selected";}else{}?>><?= $study_program['name']?></option>
@@ -82,7 +83,7 @@
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Status</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="is_active" name="is_active" value=<?= set_value('is_active')?>>
+                                <select class="custom-select col-12" id="is_active" name="is_active" value="<?= set_value('is_active')?>">
                                     <option value="1" <?php if($student['is_active'] == 1 ){ echo "selected";}else{}?>>Active</option>
                                     <option value="2" <?php if($student['is_active'] == 0 ){ echo "selected";}else{}?>>Not Active</option>
                                 </select>

@@ -26,8 +26,8 @@
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Category</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="category" name="category" value="<?= set_value('category')?>">
-                                    <option selected="">Choose Category...</option>
+                                <select class="custom-select col-12" id="category" name="category" value="<?= set_value('category')?>" required>
+                                    <option selected="" value="">Choose Category...</option>
                                     <option value="Academic">Academic</option>
                                     <option value="Announcement">Announcement</option>
                                     <option value="Registration">Registration</option>

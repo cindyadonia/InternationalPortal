@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Category</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="category" name="category" value="<?= set_value('category')?>">
+                                <select class="custom-select col-12" id="category" name="category" value="<?= set_value('category')?>" required>
                                     <option value="Academic" <?php if($news['category'] == 'Academic'){echo "selected";} else {}?>>Academic</option>
                                     <option value="Announcement" <?php if($news['category'] == 'Announcement'){echo "selected";} else {}?>>Announcement</option>
                                     <option value="Registration" <?php if($news['category'] == 'Registration'){echo "selected";} else {}?>>Registration</option>

@@ -14,6 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">List of International Students</h4>
+					<?= $this->session->flashdata('message');?>
                     <div class="table-responsive">
                         <table id="zero_config" class="table table-striped table-bordered">
                             <thead>

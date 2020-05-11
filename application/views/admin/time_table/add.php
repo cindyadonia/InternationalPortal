@@ -18,49 +18,49 @@
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Subject</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="subject" name="subject" value=<?= set_value('subject')?>>
+                                <input class="form-control" type="text" id="subject" name="subject" value="<?= set_value('subject')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Credits</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="credits" name="credits" value=<?= set_value('credits')?>>
+                                <input class="form-control" type="text" id="credits" name="credits" value="<?= set_value('credits')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Lecturer</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="lecturer" name="lecturer" value=<?= set_value('lecturer')?>>
+                                <input class="form-control" type="text" id="lecturer" name="lecturer" value="<?= set_value('lecturer')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Class</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="class" name="class" value=<?= set_value('class')?>>
+                                <input class="form-control" type="text" id="class" name="class" value="<?= set_value('class')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Location</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="location" name="location" value=<?= set_value('location')?>>
+                                <input class="form-control" type="text" id="location" name="location" value="<?= set_value('location')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Day</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="day" name="day" value=<?= set_value('day')?>>
+                                <input class="form-control" type="text" id="day" name="day" value="<?= set_value('day')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Start Time</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="start_time" name="start_time" value=<?= set_value('start_time')?>>
+                                <input class="form-control" type="text" id="start_time" name="start_time" value="<?= set_value('start_time')?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">End Time</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="end_time" name="end_time" value=<?= set_value('end_time')?>>
+                                <input class="form-control" type="text" id="end_time" name="end_time" value="<?= set_value('end_time')?>">
                             </div>
                         </div>
                         
