@@ -46,8 +46,9 @@ class StudyProgramModel extends CI_Model
         $this->db->update('study_programs',$study_program,$where);
         if($this->db->trans_status() === TRUE)
         {
+            $faculty_id = $this->getFacultyId($id);
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update study program </div>');
-            redirect('admin/faculty/index');
+            redirect('admin/faculty/show/'.$faculty_id);
         }
     }
 
@@ -66,6 +67,11 @@ class StudyProgramModel extends CI_Model
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete study program </div>');
             redirect('admin/faculty/show/'.$faculty_id);
         }
+    }
+
+    public function getFacultyId($study_program_id)
+    {
+        return $this->db->select("faculty_id")->from('study_programs')->where('id', $study_program_id)->get()->row()->faculty_id;
     }
 }
 ?>
