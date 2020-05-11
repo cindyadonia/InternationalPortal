@@ -42,7 +42,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Content</label>
                             <div class="col-10">
-                                <textarea class="form-control" name="content" id="content" cols="30" rows="10" required><?= $news['content']?></textarea>
+                                <textarea class="form-control" name="content" id="summernote" cols="30" rows="10" required><?= $news['content']?></textarea>
                             </div>
                         </div>
                         <div class="form-group row">

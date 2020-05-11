@@ -14,6 +14,7 @@
                 <div class="card-body">
                     <h4 class="card-title">News Form</h4>
                     <!-- <h5 class="card-subtitle"> </h5> -->
+					<?= $this->session->flashdata('message');?>
                     <?php echo form_open_multipart('admin/news/store');?>
                     <input type="hidden" name="user_id" value="<?= $this->session->userdata('id')?>">
                         <div class="form-group mt-4 row">
@@ -43,7 +44,7 @@
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Content</label>
                             <div class="col-10">
-                                <textarea class="form-control" name="content" id="content" cols="30" rows="10" required><?= set_value('content')?></textarea>
+                                <textarea class="form-control" name="content" id="summernote" required><?= set_value('content')?></textarea>
                             </div>
                         </div>
                         <div class="form-group row">

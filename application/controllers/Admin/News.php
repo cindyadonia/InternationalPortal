@@ -54,11 +54,21 @@ class News extends CI_Controller
 			$this->create();
         }
 		else {
-			$filename = $this->uploadFile($_FILES);
-			if($filename !== false)
-			{
-				$this->NewsModel->addNews($filename);
+			if(empty($_FILES['file_path']['name'])){
+				$this->NewsModel->addNews(null);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add news </div>');
 				$this->index();
+			}
+			else{
+				$filename = $this->uploadFile($_FILES);
+				if($filename !== false){
+					$this->NewsModel->addNews($filename);
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add news </div>');
+					$this->index();
+				}
+				else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to upload image! </div>');
+				}
 			}
         }
 	}
