@@ -51,6 +51,7 @@ class News extends CI_Controller
 		$this->form_validation->set_rules('user_id', 'Author', 'required|trim');
 
 		if($this->form_validation->run() == FALSE){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add news! </div>');
 			$this->create();
         }
 		else {
@@ -92,6 +93,7 @@ class News extends CI_Controller
         $this->form_validation->set_rules('category', 'News Category', 'required|trim');
 		
 		if($this->form_validation->run() == FALSE){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update news! </div>');
 			$this->show($id);
         }
 		else {
