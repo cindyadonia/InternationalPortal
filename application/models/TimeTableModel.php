@@ -58,8 +58,9 @@ class TimeTableModel extends CI_Model
         $this->db->update('student_schedules',$schedule,$where);
         if($this->db->trans_status() === TRUE)
         {
-            // redirect('student/show/'.$student_id);
-            redirect('admin/student/index');
+            $student_id = $this->getStudentId($id);
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student time table </div>');
+            redirect('admin/student/show/'.$student_id);
         }
     }
 
@@ -70,7 +71,7 @@ class TimeTableModel extends CI_Model
 
     public function selectSchedule($student_id)
     {
-        return $this->db->select("id, CONCAT(class, ' - ', name) as subject")->from('student_schedules')->where('student_id',$student_id)->get()->result_array();
+        return $this->db->select("id, CONCAT(class, ' - ', name) as subject")->from('student_schedules')->where('student_id',$student_id)->where('deleted_at',NULL)->get()->result_array();
     }
 
     public function deleteSchedule($id, $student_id)
@@ -85,8 +86,14 @@ class TimeTableModel extends CI_Model
 
         $this->db->update('student_schedules',$data, $where);
         if($this->db->trans_status() === TRUE){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student time table </div>');
             redirect('admin/student/show/'.$student_id);
         }
+    }
+
+    public function getStudentId($time_table_id)
+    {
+        return $this->db->select("student_id")->from('student_schedules')->where('id', $time_table_id)->get()->row()->student_id;
     }
 }
 ?>

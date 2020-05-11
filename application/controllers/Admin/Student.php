@@ -60,10 +60,12 @@ class Student extends CI_Controller
         $this->form_validation->set_rules('joined_at', 'Join date', 'required|trim');
 
 		if($this->form_validation->run() == FALSE){
+            $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add new student </div>');
 			$this->create();
         }
 		else {
 			$this->StudentModel->addStudent();
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new student </div>');
 			$this->index();
         }
 	}
@@ -102,6 +104,7 @@ class Student extends CI_Controller
 		$this->form_validation->set_rules('password_c', 'Confirm Password', 'trim|matches[password]');
 		
 		if($this->form_validation->run() == FALSE){
+            $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update student </div>');
 			$this->show($id);
         }
 		else {

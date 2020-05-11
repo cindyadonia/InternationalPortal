@@ -78,6 +78,7 @@ class StudentModel extends CI_Model
         $this->db->update('students',$student,$where);
         if($this->db->trans_status() === TRUE)
         {
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student information </div>');
             redirect('admin/student/index');
         }
     }
@@ -94,6 +95,7 @@ class StudentModel extends CI_Model
 
         $this->db->update('students',$data, $where);
         if($this->db->trans_status() === TRUE){
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student </div>');
             redirect('admin/student/index');
         }
     }

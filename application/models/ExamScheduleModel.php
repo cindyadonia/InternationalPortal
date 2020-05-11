@@ -57,9 +57,9 @@ class ExamScheduleModel extends CI_Model
         $this->db->update('exam_schedules',$schedule,$where);
         if($this->db->trans_status() === TRUE)
         {
-            // redirect('student/show/'.$student_id);
-            redirect('admin/student/index');
-
+            $student_id = $this->getStudentId($id);
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student exam schedule! </div>');
+            redirect('admin/student/show/'.$student_id);
         }
     }
 
@@ -75,8 +75,14 @@ class ExamScheduleModel extends CI_Model
 
         $this->db->update('exam_schedules',$data, $where);
         if($this->db->trans_status() === TRUE){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student exam schedule! </div>');
             redirect('admin/student/show/'.$student_id);
         }
+    }
+
+    public function getStudentId($exam_schedule_id)
+    {
+        return $this->db->select("student_schedules.student_id")->from('exam_schedules')->join('student_schedules','student_schedules.id = exam_schedules.student_schedule_id')->where('exam_schedules.id', $exam_schedule_id)->get()->row()->student_id;
     }
 }
 ?>
