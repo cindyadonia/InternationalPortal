@@ -17,9 +17,12 @@
     <!-- Custom CSS -->
     <link href="<?= base_url('assets');?>/css/style.min.css" rel="stylesheet">
 
-     <!-- This page plugin CSS -->
-     <link href="<?= base_url('assets');?>/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-    
+    <!-- This page plugin CSS -->
+    <link href="<?= base_url('assets');?>/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Summer Note Text Editor CSS -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets');?>/libs/summernote/dist/summernote-bs4.css">
+
 </head>
 
 <body>

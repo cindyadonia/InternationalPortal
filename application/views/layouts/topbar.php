@@ -9,7 +9,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="#">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <img src="<?= base_url('assets');?>/images/logo-uib.png" style="width:50px; height:50px; padding: 3px; background-color:#FFF; border-radius: 5%; margin-left:-2px" alt="homepage" class="light-logo" />
