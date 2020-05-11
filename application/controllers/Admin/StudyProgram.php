@@ -45,10 +45,12 @@ class StudyProgram extends CI_Controller
         $this->form_validation->set_rules('name', 'StudyProgram Name', 'required|trim');
 
 		if($this->form_validation->run() == FALSE){
-			$this->create();
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add study program </div>');
+			$this->create($faculty_id);
         }
 		else {
 			$this->StudyProgramModel->addStudyProgram($faculty_id);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new study program </div>');
 			redirect('admin/faculty/show/'.$faculty_id);
         }
 	}
@@ -72,6 +74,7 @@ class StudyProgram extends CI_Controller
         $this->form_validation->set_rules('name', 'StudyProgram Name', 'required|trim');
 		
 		if($this->form_validation->run() == FALSE){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update study program </div>');
 			$this->show($id);
         }
 		else {

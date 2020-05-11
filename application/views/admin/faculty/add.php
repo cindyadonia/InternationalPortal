@@ -13,6 +13,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Faculty Form</h4>
+                    <?= $this->session->flashdata('message');?>
                     <!-- <h5 class="card-subtitle"> </h5> -->
                     <form class="form" action="<?= base_url('Admin/Faculty/store')?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">

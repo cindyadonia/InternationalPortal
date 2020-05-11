@@ -14,6 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Faculty Form</h4>
+					<?= $this->session->flashdata('message');?>
                     <!-- <h5 class="card-subtitle"> </h5> -->
                     <form class="form" action="<?= base_url('Admin/Faculty/update/'.$faculty['id'])?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
@@ -51,7 +52,7 @@
                         </div>
                         <div class="ml-auto d-flex no-block align-items-center">
                             <div class="dl">
-                                <a href="<?= base_url('Admin/StudyProgram/create/'.$faculty['id'])?>" class="btn btn-primary">Add StudyProgram</a>
+                                <a href="<?= base_url('Admin/StudyProgram/create/'.$faculty['id'])?>" class="btn btn-primary">Add Study Program</a>
                             </div>
                         </div>
                     </div>
