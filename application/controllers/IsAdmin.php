@@ -7,6 +7,8 @@ class IsAdmin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
+		$this->load->model('StudentModel');
+
 	}
 	
 	public function index()
@@ -23,6 +25,7 @@ class IsAdmin extends CI_Controller
 		}
 		else{
 			$data['title'] = 'Dashboard';
+			$data['students'] = $this->StudentModel->getStudents();
 			$this->load->view('layouts/header', $data);
 			$this->load->view('layouts/admin_sidebar', $data);
 			$this->load->view('layouts/topbar', $data);
