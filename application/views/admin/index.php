@@ -59,18 +59,6 @@
                                             </tr>
                                             <?php endforeach;?>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Student No</th>
-                                                <th>Name</th>
-                                                <th>Birth Date</th>
-                                                <th>Nationality</th>
-                                                <th>University</th>
-                                                <th>Study Program</th>
-                                                <th>Joined On</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
