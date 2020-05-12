@@ -7,6 +7,8 @@ class Auth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
+		$this->load->model('AuthModel');
+
 	}
 
 	public function index()
@@ -119,5 +121,32 @@ class Auth extends CI_Controller
 
 		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> You have logged out! </div>');
 		redirect('auth');
+	}
+
+	public function changePassword()
+	{
+		$type = $this->input->post('type');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+		
+		if($this->form_validation->run() == FALSE){
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to change password </div>');
+			if($type == 1){
+				redirect('IsAdmin');
+			}
+			else if($type == 2){
+				redirect('IsStudent');
+			}
+			else{
+				$this->session->unset_userdata('id');
+				$this->session->unset_userdata('name');
+				$this->session->unset_userdata('username');
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Oops! Something went wrong </div>');
+				redirect('auth');
+			}
+        }
+		else {
+			$this->AuthModel->updatePassword();
+        }
 	}
 }
