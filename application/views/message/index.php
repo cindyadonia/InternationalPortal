@@ -125,7 +125,7 @@
                                 }
                                 // html += "<div class='box bg-light-inverse'>" + jsonObject.new_chats[i].content + "</div>";
                                 // html += "</div>";
-                                html += "<div class='chat-time'>" +new Date(jsonObject.new_chats[i].created_at).toString().slice(16,21); + "</div>";
+                                html += "<div class='chat-time'>" +new Date(jsonObject.new_chats[i].created_at + "+2:00").toString().slice(3,21); + "</div>";
                                 html += "</li>";
                             }
                             else if(jsonObject.new_chats[i].sender_no != "<?= $this->session->userdata('user_no') ?>")
@@ -139,7 +139,7 @@
                                 }
                                 // html += "<div class='box bg-light-info'>" + jsonObject.new_chats[i].content + "</div>";
                                 // html += "</div>";
-                                html += "<div class='chat-time'>" +new Date(jsonObject.new_chats[i].created_at).toString().slice(16,21); + "</div>";
+                                html += "<div class='chat-time'>" +new Date(jsonObject.new_chats[i].created_at + "+2:00").toString().slice(3,21); + "</div>";
                                 html += "</li>";
                             }
                         }
@@ -176,7 +176,7 @@
                                     html += "<div class='box bg-light-inverse'>" + jsonObject.chats[i].content + "</div>";
                                 }
                                 html += "</div>";
-                                html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at).toString().slice(16,21); + "</div>";
+                                html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at + "+2:00").toString().slice(3,21); + "</div>";
                                 html += "</li>";
                             }
                             else if(jsonObject.chats[i].sender_no != "<?= $this->session->userdata('user_no') ?>")
@@ -189,7 +189,7 @@
                                     html += "<div class='box bg-light-info'>" + jsonObject.chats[i].content + "</div>";
                                 }
                                 html += "</div>";
-                                html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at).toString().slice(16,21); + "</div>";
+                                html += "<div class='chat-time'>" +new Date(jsonObject.chats[i].created_at + "+2:00").toString().slice(3,21); + "</div>";
                                 html += "</li>";
                             }
                         }
