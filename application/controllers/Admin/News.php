@@ -18,7 +18,7 @@ class News extends CI_Controller
 			$this->load->library('form_validation');
 			$this->load->model('NewsModel');
 	
-			$this->load->helper(array('form', 'url'));
+			$this->load->helper(array('form', 'url', 'file'));
 		}
 	}
 	
@@ -103,6 +103,7 @@ class News extends CI_Controller
 			$this->show($id);
         }
 		else {
+			$filename = $this->uploadFile($_FILES);
 			if(empty($_FILES['file_path']['name'])){
 				$news = array(
 					'title' =>  $this->input->post('title'),
@@ -111,7 +112,6 @@ class News extends CI_Controller
 				);
 			}
 			else{
-				$filename = $this->uploadFile($_FILES);
 				if($filename == false){
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to upload image! Allowed types are jpg, jpeg, and png (Max 2 MB. Size 1024x1024)</div>');
 					return $this->index();
@@ -124,8 +124,12 @@ class News extends CI_Controller
 						'category' =>  $this->input->post('category'),
 					);
 				}
-			}
+				$oldFileName = $this->NewsModel->oldFile($id);
+			}			
 			if($this->NewsModel->updateNews($id, $news)){
+				if($filename != false){
+					$this->deleteOldFile($oldFileName);
+				}
 				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update news </div>');
 			}
 			else{
@@ -137,7 +141,9 @@ class News extends CI_Controller
 
 	public function destroy($id)
 	{
+		$oldFileName = $this->NewsModel->oldFile($id);
 		if($this->NewsModel->deleteNews($id)){
+			$this->deleteOldFile($oldFileName);
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete news </div>');
 		}
 		else{
@@ -168,6 +174,16 @@ class News extends CI_Controller
 		{
 			$data = array('upload_data' => $this->upload->data());
 			return $file['file_name'];
+		}
+	}
+
+	private function deleteOldFile($oldFile)
+	{
+		// $path = $_SERVER['DOCUMENT_ROOT'].'/uploads/';
+		$path = realpath(APPPATH . '../uploads/news');
+		$fullpath = $path.'\\'.$oldFile;
+		if(is_file($fullpath)){
+			unlink($fullpath);
 		}
 	}
 }

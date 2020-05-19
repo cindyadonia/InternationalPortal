@@ -37,5 +37,10 @@ class NewsModel extends CI_Model
 
         return $this->db->update('news',$data, $where);
     }
+
+    public function oldFile($id)
+    {
+        return $this->db->select('news.file_path')->from('news')->where('news.id',$id)->get()->row()->file_path;
+    }
 }
 ?>
