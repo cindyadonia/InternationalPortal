@@ -31,7 +31,7 @@ class Student extends CI_Controller
         $this->load->view('layouts/header', $data);
 		$this->load->view('layouts/admin_sidebar', $data);
 		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/student/index', $data);
+		$this->load->view('Admin/Student/index', $data);
 		$this->load->view('layouts/footer');
     }
 
