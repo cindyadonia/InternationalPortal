@@ -134,11 +134,17 @@ class TimeTable extends CI_Controller
 	public function destroy($id)
 	{
 		$student_id = $this->TimeTableModel->getStudentId($id);
-		if($this->TimeTableModel->deleteSchedule($id)){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student time table </div>');
+		$child = $this->TimeTableModel->checkHasChild($id);
+        if(count($child) > 0){
+			$this->session->set_flashdata('message','<div class="alert alert-warning" role="alert"> Failed to delete schedule! Schedule is currently being registered to exam schedules! </div>');            
 		}
 		else{
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Failed to delete student\'s time table</div>');
+			if($this->TimeTableModel->deleteSchedule($id)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student time table </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Failed to delete student\'s time table</div>');
+			}
 		}
 		redirect('Admin/Student/show/'.$student_id);
 	}

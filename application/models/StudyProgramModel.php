@@ -47,5 +47,14 @@ class StudyProgramModel extends CI_Model
     {
         return $this->db->select("faculty_id")->from('study_programs')->where('id', $study_program_id)->get()->row()->faculty_id;
     }
+
+    public function checkHasChild($id)
+    {
+        return $this->db->select('students.id AS `student_id`')->from('study_programs')
+        ->join('students', 'study_programs.id = students.study_program_id')
+        ->where('students.deleted_at', NULL)
+        ->where('study_programs.id', $id)
+        ->get()->result_array();
+    }
 }
 ?>

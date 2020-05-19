@@ -53,5 +53,14 @@ class TimeTableModel extends CI_Model
     {
         return $this->db->select("student_id")->from('student_schedules')->where('id', $time_table_id)->get()->row()->student_id;
     }
+
+    public function checkHasChild($id)
+    {
+        return $this->db->select('exam_schedules.id AS `exam_id`')->from('student_schedules')
+        ->join('exam_schedules', 'student_schedules.id = exam_schedules.student_schedule_id')
+        ->where('exam_schedules.deleted_at', NULL)
+        ->where('student_schedules.id', $id)
+        ->get()->result_array();
+    }
 }
 ?>

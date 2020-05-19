@@ -100,11 +100,17 @@ class StudyProgram extends CI_Controller
 
 	public function destroy($id, $faculty_id)
 	{
-		if($this->StudyProgramModel->deleteStudyProgram($id, $faculty_id)){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete study program </div>');
+		$child = $this->StudyProgramModel->checkHasChild($id);
+        if(count($child) > 0){
+			$this->session->set_flashdata('message','<div class="alert alert-warning" role="alert"> Failed to delete study program! Some study program currently being registered to student(s)! </div>');
 		}
 		else{
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update study program </div>');
+			if($this->StudyProgramModel->deleteStudyProgram($id, $faculty_id)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete study program </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update study program </div>');
+			}
 		}
 		redirect('admin/faculty/show/'.$faculty_id);
 	}

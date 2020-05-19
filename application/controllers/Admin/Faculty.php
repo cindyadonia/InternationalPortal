@@ -107,11 +107,17 @@ class Faculty extends CI_Controller
 
 	public function destroy($id)
 	{
-		if($this->FacultyModel->deleteFaculty($id)){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete faculty </div>');            
+		$child = $this->FacultyModel->checkHasChild($id);
+        if(count($child) > 0){
+			$this->session->set_flashdata('message','<div class="alert alert-warning" role="alert"> Failed to delete faculty! Some study program currently being registered to student(s)! </div>');            
 		}
 		else{
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete faculty </div>');
+			if($this->FacultyModel->deleteFaculty($id)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete faculty </div>');            
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete faculty </div>');
+			}
 		}
 		return $this->index();
 	}
