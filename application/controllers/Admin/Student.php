@@ -21,18 +21,23 @@ class Student extends CI_Controller
 			$this->load->model('TimeTableModel');
 			$this->load->model('ExamScheduleModel');
 		}
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/admin_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('admin/student/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
     
     public function index()
     {
 		$data['title'] = 'Dashboard';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['students'] = $this->StudentModel->getStudents();
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('Admin/Student/index', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('index', $data);
     }
 
     public function create()
@@ -40,12 +45,7 @@ class Student extends CI_Controller
 		$data['title'] = 'Add New Student';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['study_programs'] = $this->StudyProgramModel->getStudyPrograms();
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/student/add', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('add', $data);
     }
 
     public function store()
@@ -80,12 +80,7 @@ class Student extends CI_Controller
 		$data['totalcredit'] = $this->TimeTableModel->totalCredits($id);
 		$data['midterms'] = $this->ExamScheduleModel->getExamSchedules($id,$type=1);
 		$data['finals'] = $this->ExamScheduleModel->getExamSchedules($id,$type=2);
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/student/edit', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('edit', $data);
 	}
 	
 	public function update($id)

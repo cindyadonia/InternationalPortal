@@ -18,19 +18,23 @@ class TimeTable extends CI_Controller
 			$this->load->library('form_validation');
 			$this->load->model('TimeTableModel');
 		}
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/admin_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('admin/time_table/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
     
     public function index()
     {	
 		$data['title'] = 'Dashboard';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
         $data['students'] = $this->db->select('students.*, study_programs.name AS `study_program_name`')->from('students')->join('study_programs', 'students.study_program_id = study_programs.id')->where('deleted_at',NULL)->get()->result_array();
-        
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/time_table/index', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('index', $data);
     }
 
     public function create($student_id)
@@ -38,11 +42,7 @@ class TimeTable extends CI_Controller
 		$data['title'] = 'Add New Subject';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['student_id'] = $student_id;
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/time_table/add', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('add', $data);
     }
 
     public function store($student_id)
@@ -74,12 +74,7 @@ class TimeTable extends CI_Controller
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['student'] = $this->db->select('*')->from('students')->where('id',$id)->get()->row_array();
 		$data['schedule'] = $this->TimeTableModel->getSchedule($id);
-        
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/time_table/edit', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('edit', $data);
 	}
 	
 	public function update($id)

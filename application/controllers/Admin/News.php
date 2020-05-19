@@ -20,27 +20,28 @@ class News extends CI_Controller
 	
 			$this->load->helper(array('form', 'url'));
 		}
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/admin_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('admin/news/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
     
     public function index()
     {
 		$data['title'] = 'Dashboard';
 		$data['newss'] = $this->NewsModel->getAllNews();
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/news/index', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('index', $data);
     }
 
     public function create()
     {
 		$data['title'] = 'Add News';
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/news/add', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('add', $data);
     }
 
     public function store()
@@ -78,12 +79,7 @@ class News extends CI_Controller
     {
         $data['title'] = 'Edit News';
 		$data['news'] = $this->NewsModel->getNews($id);
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/news/edit', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('edit', $data);
 	}
 	
 	public function update($id)

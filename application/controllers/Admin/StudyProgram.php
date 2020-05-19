@@ -19,24 +19,23 @@ class StudyProgram extends CI_Controller
 			$this->load->model('FacultyModel');
 			$this->load->model('StudyProgramModel');
 		}
-
     }
     
-    public function index()
-    {
-    }
+    private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/admin_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('admin/study_program/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
 
     public function create($faculty_id)
     {
 		$data['title'] = 'Add Study Program';
         $data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-        $data['faculty_id'] = $faculty_id;
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/study_program/add', $data);
-		$this->load->view('layouts/footer');
+		$data['faculty_id'] = $faculty_id;
+		$this->loadLayout('add', $data);
     }
 
     public function store($faculty_id)
@@ -60,12 +59,7 @@ class StudyProgram extends CI_Controller
         $data['title'] = 'Edit Study Program';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['study_program'] = $this->StudyProgramModel->getStudyProgramsById($id);
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/study_program/edit', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('edit', $data);
 	}
 	
 	public function update($id)

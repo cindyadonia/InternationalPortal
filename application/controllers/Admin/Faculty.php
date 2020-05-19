@@ -19,31 +19,31 @@ class Faculty extends CI_Controller
 			$this->load->model('FacultyModel');
 			$this->load->model('StudyProgramModel');
 		}
-
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/admin_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('admin/faculty/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
     
     public function index()
     {
 		$data['title'] = 'Dashboard';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['faculties'] = $this->FacultyModel->getFaculties();
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/faculty/index', $data);
-		$this->load->view('layouts/footer');
+
+		$this->loadLayout('index', $data);
     }
 
     public function create()
     {
 		$data['title'] = 'Add Faculty';
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/faculty/add', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('add', $data);
     }
 
     public function store()
@@ -68,12 +68,7 @@ class Faculty extends CI_Controller
 		$data['user'] = $this->db->select('name, admin_no')->from('admins')->where('admins.admin_no',$this->session->userdata('admin_no'))->get()->row_array();
 		$data['faculty'] = $this->FacultyModel->getFaculty($id);
 		$data['study_programs'] = $this->StudyProgramModel->getStudyProgramsByFaculty($id);
-
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/admin_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('admin/faculty/edit', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('edit', $data);
 	}
 	
 	public function update($id)
