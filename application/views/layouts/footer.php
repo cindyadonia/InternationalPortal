@@ -46,7 +46,7 @@
     <script src="<?= base_url('assets');?>/js/pages/datatable/datatable-basic.init.js"></script>
 
     <!-- Summernote -->
-    <script src="<?= base_url('assets')?>/libs/summernote/dist/summernote-bs4.js"></script>
+    <script src="<?= base_url('assets')?>/libs/summernote/dist/summernote-bs4.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#summernote').summernote({
