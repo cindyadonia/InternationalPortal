@@ -25,7 +25,7 @@ class IsAdmin extends CI_Controller
 		}
 		else{
 			$data['title'] = 'Dashboard';
-			$data['students'] = $this->StudentModel->getStudents();
+			$data['students'] = $this->StudentModel->getActiveStudents();
 			$this->load->view('layouts/header', $data);
 			$this->load->view('layouts/admin_sidebar', $data);
 			$this->load->view('layouts/topbar', $data);

@@ -47,10 +47,18 @@
                         </div>
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Image</label>
-                            <div class="col-10">
+                            <div class="col-6">
                                 <input type="file" id="file_path" name="file_path">
                             </div>
                         </div>
+                        <?php if($news['file_path'] != NULL):?>
+                        <div class="form-group mt-4 row">
+                            <label for="example-text-input" class="col-2 col-form-label">Current image</label>
+                            <div class="col-6">
+                                <img src="<?= base_url('uploads/news/'.$news['file_path'])?>" style="max-width:100%">
+                            </div>
+                        </div>
+                        <?php endif;?>
                         <div class="form-group row">
                             <label for="example-password-input" class="col-2 col-form-label"></label>
                             <div class="col-10">

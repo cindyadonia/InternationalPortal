@@ -61,12 +61,30 @@ class Student extends CI_Controller
 
 		if($this->form_validation->run() == FALSE){
             $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add new student </div>');
-			$this->create();
+			return $this->create();
         }
 		else {
-			$this->StudentModel->addStudent();
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new student </div>');
-			$this->index();
+			$student = [
+				'student_no' => $this->input->post('student_no'),
+				'name' => $this->input->post('name'),
+				'birth_date' => $this->input->post('birth_date'),
+				'nationality' => $this->input->post('nationality'),
+				'university_origin' => $this->input->post('university_origin'),
+				'semester' => $this->input->post('semester'),
+				'is_active' => TRUE,
+				'joined_at' => $this->input->post('joined_at'),
+				'password' => password_hash($this->input->post('student_no'), PASSWORD_DEFAULT),
+				'created_at' => date('Y-m-d H:i:s'),
+				'study_program_id' => $this->input->post('study_program'),
+				'role_id' => 2,
+			];
+			if($this->StudentModel->addStudent($student)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new student </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add new student </div>');
+			}
+			return $this->index();
         }
 	}
 
@@ -101,15 +119,44 @@ class Student extends CI_Controller
 		
 		if($this->form_validation->run() == FALSE){
             $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update student </div>');
-			$this->show($id);
+			return $this->show($id);
         }
 		else {
-			$this->StudentModel->updateStudent($id);
+			$student = array(
+				'student_no' => $this->input->post('student_no'),
+				'name' => $this->input->post('name'),
+				'birth_date' => $this->input->post('birth_date'),
+				'nationality' => $this->input->post('nationality'),
+				'university_origin' => $this->input->post('university_origin'),
+				'semester' => $this->input->post('semester'),
+				'study_program_id' => $this->input->post('study_program'),
+				'joined_at' => $this->input->post('joined_at'),
+				'is_active' => $this->input->post('is_active'),
+			);
+			$password = $this->input->post('password');
+			if($password !== ""){
+				$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+				$student['password'] = $password;
+			}
+
+			if($this->StudentModel->updateStudent($id, $student)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student information </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update student </div>');
+			}
+			return $this->show($id);
         }
 	}
 
 	public function destroy($id)
 	{
-		$this->StudentModel->deleteStudent($id);
+		if($this->StudentModel->deleteStudent($id)){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student </div>');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete student </div>');
+		}
+		return $this->index();
 	}
 }

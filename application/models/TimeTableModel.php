@@ -12,56 +12,18 @@ class TimeTableModel extends CI_Model
         return $this->db->select('*')->from('student_schedules')->where('id',$id)->get()->row_array();
     }
 
-    public function addSchedulebyStudentId($student_id)
+    public function addSchedulebyStudentId($subjectSchedule)
     {
-        $subjectSchedule = [
-            'name' => $this->input->post('subject'),
-            'credits' => $this->input->post('credits'),
-            'lecturer' => $this->input->post('lecturer'),
-            'day' => $this->input->post('day'),
-            'start_time' => $this->input->post('start_time'),
-            'end_time' => $this->input->post('end_time'),
-            'class' => $this->input->post('class'),
-            'location' => $this->input->post('location'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'student_id' => $student_id
-        ];
         return $this->db->insert('student_schedules', $subjectSchedule);
     }
     
-    public function updateSchedule($id)
+    public function updateSchedule($id, $schedule)
     {
-        $name = $this->input->post('subject');
-        $credits = $this->input->post('credits');
-        $lecturer = $this->input->post('lecturer');
-        $day = $this->input->post('day');
-        $start_time = $this->input->post('start_time');
-        $end_time = $this->input->post('end_time');
-        $class = $this->input->post('class');
-        $location = $this->input->post('location');
-        
-        $schedule = array(
-            'name' => $name,
-            'credits' => $credits,
-            'lecturer' => $lecturer,
-            'day' => $day,
-            'start_time' => $start_time,
-            'end_time' => $end_time,
-            'class' => $class,
-            'location' => $location,
-        );
-
         $where = array(
             'id' => $id
         );
 
-        $this->db->update('student_schedules',$schedule,$where);
-        if($this->db->trans_status() === TRUE)
-        {
-            $student_id = $this->getStudentId($id);
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student time table </div>');
-            redirect('Admin/Student/show/'.$student_id);
-        }
+        return $this->db->update('student_schedules',$schedule,$where);
     }
 
     public function totalCredits($id)
@@ -74,7 +36,7 @@ class TimeTableModel extends CI_Model
         return $this->db->select("id, CONCAT(class, ' - ', name) as subject")->from('student_schedules')->where('student_id',$student_id)->where('deleted_at',NULL)->get()->result_array();
     }
 
-    public function deleteSchedule($id, $student_id)
+    public function deleteSchedule($id)
     {
         $data = array(
             'deleted_at' => date('Y-m-d H:i:s')
@@ -84,11 +46,7 @@ class TimeTableModel extends CI_Model
             'id' => $id
         );
 
-        $this->db->update('student_schedules',$data, $where);
-        if($this->db->trans_status() === TRUE){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student time table </div>');
-            redirect('Admin/Student/show/'.$student_id);
-        }
+        return $this->db->update('student_schedules',$data, $where);
     }
 
     public function getStudentId($time_table_id)

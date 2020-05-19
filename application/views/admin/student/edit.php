@@ -21,37 +21,37 @@
                         <div class="form-group mt-4 row">
                             <label for="example-text-input" class="col-2 col-form-label">Student No</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="student_no" name="student_no" value="<?= $student['student_no'];?>" readonly>
+                                <input class="form-control" type="text" id="student_no" name="student_no" value="<?= $student['student_no'];?>" readonly required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Name</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="name" name="name" value="<?= $student['name'];?>">
+                                <input class="form-control" type="text" id="name" name="name" value="<?= $student['name'];?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Birth Date</label>
                             <div class="col-10">
-                                <input class="form-control" type="date" id="birth_date" name="birth_date" value="<?= $student['birth_date'];?>">
+                                <input class="form-control" type="date" id="birth_date" name="birth_date" value="<?= $student['birth_date'];?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">Nationality</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="nationality" name="nationality" value="<?= $student['nationality'];?>">
+                                <input class="form-control" type="text" id="nationality" name="nationality" value="<?= $student['nationality'];?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-2 col-form-label">University Origin</label>
                             <div class="col-10">
-                                <input class="form-control" type="text" id="university_origin" name="university_origin" value="<?= $student['university_origin'];?>">
+                                <input class="form-control" type="text" id="university_origin" name="university_origin" value="<?= $student['university_origin'];?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Semester</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="semester" name="semester" value="<?= set_value('semester')?>">
+                                <select class="custom-select col-12" id="semester" name="semester" value="<?= set_value('semester')?>" required>
                                     <option value="1" <?php if($student['semester'] == 1 ){ echo "selected";}else{}?>>Semester One</option>
                                     <option value="2" <?php if($student['semester'] == 2 ){ echo "selected";}else{}?>>Semester Two</option>
                                     <option value="3" <?php if($student['semester'] == 3 ){ echo "selected";}else{}?>>Semester Three</option>
@@ -66,7 +66,7 @@
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Study Program</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="study_program" name="study_program" value="<?= set_value('study_program')?>">
+                                <select class="custom-select col-12" id="study_program" name="study_program" value="<?= set_value('study_program')?>" required>
                                     <?php
                                     foreach($study_programs as $study_program){ ?>
                                     <option value="<?= $study_program['id']?>" <?php if($student['study_program_id'] ==  $study_program['id'] ){ echo "selected";}else{}?>><?= $study_program['name']?></option>
@@ -77,15 +77,15 @@
                         <div class="form-group row">
                             <label for="example-datetime-local-input" class="col-2 col-form-label">Join Date</label>
                             <div class="col-10">
-                                <input class="form-control" type="date" id="joined_at" name="joined_at" value="<?= date($student['joined_at']);?>">
+                                <input class="form-control" type="date" id="joined_at" name="joined_at" value="<?= date($student['joined_at']);?>" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-month-input2" class="col-2 col-form-label">Status</label>
                             <div class="col-10">
-                                <select class="custom-select col-12" id="is_active" name="is_active" value="<?= set_value('is_active')?>">
+                                <select class="custom-select col-12" id="is_active" name="is_active" value="<?= set_value('is_active')?>" required>
                                     <option value="1" <?php if($student['is_active'] == 1 ){ echo "selected";}else{}?>>Active</option>
-                                    <option value="2" <?php if($student['is_active'] == 0 ){ echo "selected";}else{}?>>Not Active</option>
+                                    <option value="0" <?php if($student['is_active'] == 0 ){ echo "selected";}else{}?>>Not Active</option>
                                 </select>
                             </div>
                         </div>
@@ -312,13 +312,13 @@
         var id = $(this).attr("data-schedule-id");
         var student_id = $(this).attr("data-student-id");
         var link = "<?= base_url('Admin/TimeTable/destroy/') ?>";
-        $('#target-delete-schedule').attr("href", link+id+'/'+student_id);
+        $('#target-delete-schedule').attr("href", link+id);
     });
 
     $('.btnDelExamSchedule').click(function() {
         var id = $(this).attr("data-midterm-id");
         var student_id = $(this).attr("data-student-id");
         var link = "<?= base_url('Admin/ExamSchedule/destroy/') ?>";
-        $('#target-delete-midterm').attr("href", link+id+'/'+student_id);
+        $('#target-delete-midterm').attr("href", link+id);
     });
 </script>

@@ -53,25 +53,35 @@ class News extends CI_Controller
 
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add news! </div>');
-			$this->create();
+			return $this->create();
         }
 		else {
 			if(empty($_FILES['file_path']['name'])){
-				$this->NewsModel->addNews(null);
-				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add news </div>');
-				$this->index();
+				$filename = NULL;
 			}
 			else{
 				$filename = $this->uploadFile($_FILES);
-				if($filename !== false){
-					$this->NewsModel->addNews($filename);
-					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add news </div>');
-					$this->index();
-				}
-				else{
-					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to upload image! </div>');
+				if($filename == false){
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to upload image! Allowed types are jpg, jpeg, and png (Max 2 MB. Size 1024x1024)</div>');
+					return $this->index();
 				}
 			}
+
+			$news = [
+				'title' => $this->input->post('title'),
+				'content' => $this->input->post('content'),
+				'file_path' => $filename,
+				'category' => $this->input->post('category'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'user_id' => $this->input->post('user_id'),
+			];
+			if($this->NewsModel->addNews($news)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add news </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add news! </div>');
+			}
+			return $this->index();
         }
 	}
 	
@@ -93,13 +103,47 @@ class News extends CI_Controller
 			$this->show($id);
         }
 		else {
-			$this->NewsModel->updateNews($id);
+			if(empty($_FILES['file_path']['name'])){
+				$news = array(
+					'title' =>  $this->input->post('title'),
+					'content' =>  $this->input->post('content'),
+					'category' =>  $this->input->post('category'),
+				);
+			}
+			else{
+				$filename = $this->uploadFile($_FILES);
+				if($filename == false){
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to upload image! Allowed types are jpg, jpeg, and png (Max 2 MB. Size 1024x1024)</div>');
+					return $this->index();
+				}
+				else {
+					$news = array(
+						'title' =>  $this->input->post('title'),
+						'content' =>  $this->input->post('content'),
+						'file_path' =>  $filename,
+						'category' =>  $this->input->post('category'),
+					);
+				}
+			}
+			if($this->NewsModel->updateNews($id, $news)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update news </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update news! </div>');
+			}
+			return $this->index();
         }
 	}
 
 	public function destroy($id)
 	{
-		$this->NewsModel->deleteNews($id);
+		if($this->NewsModel->deleteNews($id)){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete news </div>');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete news! </div>');
+		}
+		return $this->index();
 	}
 
 	private function uploadFile($file)

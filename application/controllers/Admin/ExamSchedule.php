@@ -61,8 +61,22 @@ class ExamSchedule extends CI_Controller
         }
         
 		else {
-			$this->ExamScheduleModel->addExamSchedule();
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add student exam schedule! </div>');
+			$midterm = [
+				'table_no' => $this->input->post('table_no'),
+				'date' => date($this->input->post('date')),
+				'location' => $this->input->post('location'),
+				'start_time' => $this->input->post('start_time'),
+				'end_time' => $this->input->post('end_time'),
+				'exam_type' => $this->input->post('exam_type'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'student_schedule_id' => $this->input->post('subject'),
+			];
+			if($this->ExamScheduleModel->addExamSchedule($midterm)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add student exam schedule! </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add student exam schedule! </div>');
+			}
 			redirect('Admin/Student/show/'.$student_id);
         }
 	}
@@ -94,12 +108,35 @@ class ExamSchedule extends CI_Controller
         }
         
 		else {
-			$this->ExamScheduleModel->updateExamSchedule($id);
+			$schedule = array(
+				'student_schedule_id' => $this->input->post('subject'),
+				'date' => $this->input->post('date'),
+				'table_no' => $this->input->post('table_no'),
+				'start_time' => $this->input->post('start_time'),
+				'end_time' => $this->input->post('end_time'),
+				'location' => $this->input->post('location'),
+				'exam_type' => $this->input->post('exam_type')
+			);
+			$student_id = $this->ExamScheduleModel->getStudentId($id);
+			if($this->ExamScheduleModel->updateExamSchedule($id, $schedule)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student exam schedule! </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update student exam schedule! </div>');
+			}
+			redirect('Admin/Student/show/'.$student_id);
         }
 	}
 
-	public function destroy($id, $student_id)
+	public function destroy($id)
 	{
-		$this->ExamScheduleModel->deleteExamSchedule($id, $student_id);
+		$student_id = $this->ExamScheduleModel->getStudentId($id);
+		if($this->ExamScheduleModel->deleteExamSchedule($id)){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student exam schedule! </div>');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete student exam schedule! </div>');
+		}
+		redirect('Admin/Student/show/'.$student_id);
 	}
 }

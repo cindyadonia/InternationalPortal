@@ -7,18 +7,8 @@ class NewsModel extends CI_Model
         return $this->db->select('news.*, admins.name AS `author`')->from('news')->join('admins', 'admins.id = news.user_id')->where('news.deleted_at',NULL)->get()->result_array();
     }
 
-    public function addNews($filename)
+    public function addNews($news)
     {
-        $news = [
-            'title' => $this->input->post('title'),
-            'content' => $this->input->post('content'),
-            'file_path' => $filename,
-            'category' => $this->input->post('category'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'user_id' => $this->input->post('user_id'),
-        ];
-
-        // var_dump($news);die;
         return $this->db->insert('news', $news);
     }
     
@@ -27,30 +17,12 @@ class NewsModel extends CI_Model
         return $this->db->select('news.*, admins.name AS `author`')->from('news')->join('admins', 'admins.id = news.user_id')->where('news.id',$id)->get()->row_array();
     }
 
-    public function updateNews($id)
+    public function updateNews($id, $news)
     {
-        $title = $this->input->post('title');
-        $content = $this->input->post('content');
-        $file_path = $this->input->post('file_path');
-        $category = $this->input->post('category');
-
-        $news = array(
-            'title' =>  $title,
-            'content' =>  $content,
-            'file_path' =>  $file_path,
-            'category' =>  $category,
-        );
-
         $where = array(
             'id' => $id
         );
-
-        $this->db->update('news',$news,$where);
-        if($this->db->trans_status() === TRUE)
-        {
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update news </div>');
-            redirect('Admin/News/index');
-        }
+        return $this->db->update('news', $news, $where);
     }
 
     public function deleteNews($id)
@@ -63,11 +35,7 @@ class NewsModel extends CI_Model
             'id' => $id
         );
 
-        $this->db->update('news',$data, $where);
-        if($this->db->trans_status() === TRUE){
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete news </div>');
-            redirect('Admin/News/index');
-        }
+        return $this->db->update('news',$data, $where);
     }
 }
 ?>

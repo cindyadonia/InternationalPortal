@@ -45,11 +45,21 @@ class StudyProgram extends CI_Controller
 
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add study program </div>');
-			$this->create($faculty_id);
+			return 	$this->create($faculty_id);
         }
 		else {
-			$this->StudyProgramModel->addStudyProgram($faculty_id);
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new study program </div>');
+			$study_program = [
+				'code' => $this->input->post('code'),
+				'name' => $this->input->post('name'),
+				'faculty_id' => $faculty_id,
+				'created_at' => date('Y-m-d H:i:s'),
+			];
+			if($this->StudyProgramModel->addStudyProgram($study_program)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new study program </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add study program </div>');
+			}
 			redirect('Admin/Faculty/show/'.$faculty_id);
         }
 	}
@@ -69,15 +79,33 @@ class StudyProgram extends CI_Controller
 		
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update study program </div>');
-			$this->show($id);
+			return $this->show($id);
         }
 		else {
-			$this->StudyProgramModel->updateStudyProgram($id);
+			$study_program = array(
+				'code' => $this->input->post('code'),
+				'name' => $this->input->post('name')
+			);
+			if($this->StudyProgramModel->updateStudyProgram($id, $study_program)){
+				$faculty_id = $this->StudyProgramModel->getFacultyId($id);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update study program </div>');
+				redirect('admin/faculty/show/'.$faculty_id);
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update study program </div>');
+				return $this->show($id);
+			}
 		}
 	}
 
 	public function destroy($id, $faculty_id)
 	{
-		$this->StudyProgramModel->deleteStudyProgram($id, $faculty_id);
+		if($this->StudyProgramModel->deleteStudyProgram($id, $faculty_id)){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete study program </div>');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update study program </div>');
+		}
+		redirect('admin/faculty/show/'.$faculty_id);
 	}
 }

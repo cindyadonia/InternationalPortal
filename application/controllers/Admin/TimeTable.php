@@ -62,8 +62,24 @@ class TimeTable extends CI_Controller
         }
         
 		else {
-			$this->TimeTableModel->addSchedulebyStudentId($student_id);
-            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new student time table</div>');
+			$subjectSchedule = [
+				'name' => $this->input->post('subject'),
+				'credits' => $this->input->post('credits'),
+				'lecturer' => $this->input->post('lecturer'),
+				'day' => $this->input->post('day'),
+				'start_time' => $this->input->post('start_time'),
+				'end_time' => $this->input->post('end_time'),
+				'class' => $this->input->post('class'),
+				'location' => $this->input->post('location'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'student_id' => $student_id
+			];
+			if($this->TimeTableModel->addSchedulebyStudentId($subjectSchedule)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new student time table</div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add student\'s time table</div>');
+			}
             redirect('Admin/Student/show/'.$student_id);
         }
 	}
@@ -88,19 +104,42 @@ class TimeTable extends CI_Controller
         $this->form_validation->set_rules('start_time', 'Start Time', 'required|trim');
         $this->form_validation->set_rules('end_time', 'End Time', 'required|trim');
 		
-		
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Failed to update student\'s time table</div>');
-			$this->show($student_id);
+			$this->show($id);
         }
         
 		else {
-			$this->TimeTableModel->updateSchedule($id);
+			$schedule = array(
+				'name' => $this->input->post('subject'),
+				'credits' => $this->input->post('credits'),
+				'lecturer' => $this->input->post('lecturer'),
+				'day' => $this->input->post('day'),
+				'start_time' => $this->input->post('start_time'),
+				'end_time' => $this->input->post('end_time'),
+				'class' => $this->input->post('class'),
+				'location' => $this->input->post('location'),
+			);
+			$student_id = $this->TimeTableModel->getStudentId($id);
+			if($this->TimeTableModel->updateSchedule($id, $schedule)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student time table </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Failed to update student\'s time table</div>');
+			}
+			redirect('Admin/Student/show/'.$student_id);
         }
 	}
 
-	public function destroy($id, $student_id)
+	public function destroy($id)
 	{
-		$this->TimeTableModel->deleteSchedule($id, $student_id);
+		$student_id = $this->TimeTableModel->getStudentId($id);
+		if($this->TimeTableModel->deleteSchedule($id)){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student time table </div>');
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Failed to delete student\'s time table</div>');
+		}
+		redirect('Admin/Student/show/'.$student_id);
 	}
 }

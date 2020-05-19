@@ -17,39 +17,17 @@ class StudyProgramModel extends CI_Model
         return $this->db->select('*')->from('study_programs')->where('id', $id)->get()->row_array();
     }
 
-    public function addStudyProgram($faculty_id)
+    public function addStudyProgram($study_program)
     {
-        $d = date("Y-m-d");
-        $study_program = [
-            'code' => $this->input->post('code'),
-            'name' => $this->input->post('name'),
-            'faculty_id' => $faculty_id,
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
-
         return $this->db->insert('study_programs', $study_program);
     }
     
-    public function updateStudyProgram($id)
+    public function updateStudyProgram($id, $study_program)
     {
-        $code = $this->input->post('code');
-        $name = $this->input->post('name');
-        $study_program = array(
-            'code' => $code,
-            'name' => $name
-        );
-
         $where = array(
             'id' => $id
         );
-
-        $this->db->update('study_programs',$study_program,$where);
-        if($this->db->trans_status() === TRUE)
-        {
-            $faculty_id = $this->getFacultyId($id);
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update study program </div>');
-            redirect('Admin/Faculty/show/'.$faculty_id);
-        }
+        return $this->db->update('study_programs',$study_program,$where);
     }
 
     public function deleteStudyProgram($id, $faculty_id)
@@ -62,11 +40,7 @@ class StudyProgramModel extends CI_Model
             'id' => $id
         );
 
-        $this->db->update('study_programs',$data, $where);
-        if($this->db->trans_status() === TRUE){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete study program </div>');
-            redirect('Admin/Faculty/show/'.$faculty_id);
-        }
+        return $this->db->update('study_programs',$data, $where);
     }
 
     public function getFacultyId($study_program_id)

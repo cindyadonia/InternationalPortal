@@ -12,38 +12,17 @@ class FacultyModel extends CI_Model
         return $this->db->select('*')->from('faculties')->where('id',$id)->get()->row_array();
     }
 
-    public function addFaculty()
+    public function addFaculty($faculty)
     {
-        $d = date("Y-m-d");
-        $faculty = [
-            'code' => $this->input->post('code'),
-            'name' => $this->input->post('name'),
-            'created_at' => date('Y-m-d H:i:s'),
-        ];
-
         return $this->db->insert('faculties', $faculty);
     }
     
-    public function updateFaculty($id)
+    public function updateFaculty($id, $faculty)
     {
-        $code = $this->input->post('code');
-        $name = $this->input->post('name');
-        $faculty = array(
-            'code' => $code,
-            'name' => $name
-        );
-
         $where = array(
             'id' => $id
         );
-
-        $this->db->update('faculties',$faculty,$where);
-        if($this->db->trans_status() === TRUE)
-        {
-            // redirect('student/show/'.$student_id);
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update faculty </div>');
-            redirect('Admin/Faculty/index');
-        }
+        return $this->db->update('faculties',$faculty,$where);
     }
 
     public function deleteFaculty($id)
@@ -55,12 +34,7 @@ class FacultyModel extends CI_Model
         $where = array(
             'id' => $id
         );
-
-        $this->db->update('faculties',$data, $where);
-        if($this->db->trans_status() === TRUE){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete faculty </div>');
-            redirect('Admin/Faculty/index');
-        }
+        return $this->db->update('faculties',$data, $where);
     }
 }
 ?>

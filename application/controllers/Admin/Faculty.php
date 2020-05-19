@@ -53,12 +53,21 @@ class Faculty extends CI_Controller
 
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add new faculty </div>');
-			$this->create();
+			return $this->create();
         }
 		else {
-			$this->FacultyModel->addFaculty();
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new faculty </div>');
-			$this->index();
+			$faculty = [
+				'code' => $this->input->post('code'),
+				'name' => $this->input->post('name'),
+				'created_at' => date('Y-m-d H:i:s'),
+			];
+			if($this->FacultyModel->addFaculty($faculty)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new faculty </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add faculty </div>');
+			}
+			return $this->index();
         }
 	}
 
@@ -78,15 +87,32 @@ class Faculty extends CI_Controller
 		
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update faculty </div>');
-			$this->show($id);
+			return $this->show($id);
         }
 		else {
-			$this->FacultyModel->updateFaculty($id);
+			$faculty = array(
+				'code' => $this->input->post('code'),
+				'name' => $this->input->post('name')
+			);
+			if($this->FacultyModel->updateFaculty($id, $faculty)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update faculty </div>');
+				return $this->index();
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to update faculty </div>');
+				return $this->show($id);
+			}
         }
 	}
 
 	public function destroy($id)
 	{
-		$this->FacultyModel->deleteFaculty($id);
+		if($this->FacultyModel->deleteFaculty($id)){
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete faculty </div>');            
+		}
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete faculty </div>');
+		}
+		return $this->index();
 	}
 }
