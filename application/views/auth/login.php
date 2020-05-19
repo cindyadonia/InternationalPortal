@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets');?>/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets');?>/images/favicon/favicon.png">
+    <link rel="apple-touch-icon" sizes="16x16" href="<?= base_url('assets');?>/images/favicon/apple-icon.png">
     <title>International Portal</title>
     <!-- Custom CSS -->
     <link href="<?= base_url('assets');?>/css/style.min.css" rel="stylesheet">
