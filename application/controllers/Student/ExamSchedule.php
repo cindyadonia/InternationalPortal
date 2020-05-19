@@ -17,7 +17,16 @@ class ExamSchedule extends CI_Controller
 		else{
 			$this->load->model('ExamScheduleModel');
 		}
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/student_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('student/exam/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
 
     public function index()
     {
@@ -26,10 +35,6 @@ class ExamSchedule extends CI_Controller
 		$data['midterms'] = $this->ExamScheduleModel->getExamSchedules($id,$type=1);
 		$data['finals'] = $this->ExamScheduleModel->getExamSchedules($id,$type=2);
 
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/student_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('student/exam/index', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('index', $data);
 	}
 }

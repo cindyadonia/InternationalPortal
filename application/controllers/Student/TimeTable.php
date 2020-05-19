@@ -17,7 +17,16 @@ class TimeTable extends CI_Controller
 		else{
 			$this->load->model('TimeTableModel');
 		}
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/student_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('student/time_table/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
 
     public function index()
     {
@@ -25,11 +34,6 @@ class TimeTable extends CI_Controller
 		$data['title'] = 'Time Table';
 		$data['totalcredit'] = $this->TimeTableModel->totalCredits($id);
 		$data['schedules'] = $this->TimeTableModel->getSchedules($id);
-        
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/student_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('student/time_table/index', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('index', $data);
 	}
 }

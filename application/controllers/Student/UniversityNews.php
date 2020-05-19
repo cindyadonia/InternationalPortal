@@ -17,16 +17,21 @@ class UniversityNews extends CI_Controller
 		else{
 			$this->load->model('NewsModel');
         }
-    }
+	}
+	
+	private function loadLayout($type, $data)
+	{
+		$this->load->view('layouts/header', $data);
+		$this->load->view('layouts/student_sidebar', $data);
+		$this->load->view('layouts/topbar', $data);
+		$this->load->view('student/news/'.$type, $data);
+		$this->load->view('layouts/footer');
+	}
     
     public function view($id)
     {
         $data['title'] = 'View News';
 		$data['news'] = $this->NewsModel->getNews($id);
-        $this->load->view('layouts/header', $data);
-		$this->load->view('layouts/student_sidebar', $data);
-		$this->load->view('layouts/topbar', $data);
-		$this->load->view('student/news/view', $data);
-		$this->load->view('layouts/footer');
+		$this->loadLayout('index', $data);
 	}
 }
