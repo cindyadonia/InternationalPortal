@@ -58,13 +58,13 @@ class TimeTable extends CI_Controller
 		
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add student\'s time table</div>');
-            redirect('admin/student/show/'.$student_id);
+            redirect('Admin/Student/show/'.$student_id);
         }
         
 		else {
 			$this->TimeTableModel->addSchedulebyStudentId($student_id);
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add new student time table</div>');
-            redirect('admin/student/show/'.$student_id);
+            redirect('Admin/Student/show/'.$student_id);
         }
 	}
 

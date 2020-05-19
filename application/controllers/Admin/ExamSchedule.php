@@ -52,13 +52,13 @@ class ExamSchedule extends CI_Controller
 		
 		if($this->form_validation->run() == FALSE){
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to add student exam schedule! </div>');
-			redirect('admin/student/show/'.$student_id);
+			redirect('Admin/Student/show/'.$student_id);
         }
         
 		else {
 			$this->ExamScheduleModel->addExamSchedule();
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully add student exam schedule! </div>');
-			redirect('admin/student/show/'.$student_id);
+			redirect('Admin/Student/show/'.$student_id);
         }
 	}
 

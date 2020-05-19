@@ -42,7 +42,7 @@ class FacultyModel extends CI_Model
         {
             // redirect('student/show/'.$student_id);
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update faculty </div>');
-            redirect('admin/faculty/index');
+            redirect('Admin/Faculty/index');
         }
     }
 
@@ -59,7 +59,7 @@ class FacultyModel extends CI_Model
         $this->db->update('faculties',$data, $where);
         if($this->db->trans_status() === TRUE){
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete faculty </div>');
-            redirect('admin/faculty/index');
+            redirect('Admin/Faculty/index');
         }
     }
 }

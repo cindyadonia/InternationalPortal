@@ -60,7 +60,7 @@ class TimeTableModel extends CI_Model
         {
             $student_id = $this->getStudentId($id);
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update student time table </div>');
-            redirect('admin/student/show/'.$student_id);
+            redirect('Admin/Student/show/'.$student_id);
         }
     }
 
@@ -87,7 +87,7 @@ class TimeTableModel extends CI_Model
         $this->db->update('student_schedules',$data, $where);
         if($this->db->trans_status() === TRUE){
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student time table </div>');
-            redirect('admin/student/show/'.$student_id);
+            redirect('Admin/Student/show/'.$student_id);
         }
     }
 

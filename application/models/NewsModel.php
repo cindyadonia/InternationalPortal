@@ -49,7 +49,7 @@ class NewsModel extends CI_Model
         if($this->db->trans_status() === TRUE)
         {
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully update news </div>');
-            redirect('admin/news/index');
+            redirect('Admin/News/index');
         }
     }
 
@@ -66,7 +66,7 @@ class NewsModel extends CI_Model
         $this->db->update('news',$data, $where);
         if($this->db->trans_status() === TRUE){
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete news </div>');
-            redirect('admin/news/index');
+            redirect('Admin/News/index');
         }
     }
 }
