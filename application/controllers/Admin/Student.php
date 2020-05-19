@@ -96,6 +96,7 @@ class Student extends CI_Controller
         $this->form_validation->set_rules('university_origin', 'University Origin', 'required|trim');
         $this->form_validation->set_rules('semester', 'Semester', 'required|trim');
 		$this->form_validation->set_rules('joined_at', 'Join date', 'required|trim');
+		$this->form_validation->set_rules('is_active', 'Status', 'required');
 		
 		$this->form_validation->set_rules('password', 'Password', 'trim|min_length[5]|matches[password_c]',[
 			'matches' => 'Password doesnt match',

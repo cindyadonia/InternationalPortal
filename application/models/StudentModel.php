@@ -68,7 +68,7 @@ class StudentModel extends CI_Model
             'semester' => $semester,
             'study_program_id' => $study_program,
             'joined_at' => $joined_at,
-            'is_active' => TRUE,
+            'is_active' => $is_active,
         );
 
         $where = array(
