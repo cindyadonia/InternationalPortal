@@ -39,10 +39,9 @@ class FacultyModel extends CI_Model
 
     public function checkHasChild($id)
     {
-        return $this->db->select('students.id AS `student_id`')->from('faculties')
+        return $this->db->select('study_programs.id AS `study_program_id`')->from('faculties')
         ->join('study_programs', 'faculties.id = study_programs.faculty_id')
-        ->join('students', 'study_programs.id = students.study_program_id')
-        ->where('students.deleted_at', NULL)
+        ->where('study_programs.deleted_at', NULL)
         ->where('faculties.id', $id)
         ->get()->result_array();
     }

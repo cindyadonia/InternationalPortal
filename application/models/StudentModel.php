@@ -33,6 +33,11 @@ class StudentModel extends CI_Model
 
     public function deleteStudent($id)
     {
+        $schedules = $this->checkHasSchedule($id);
+        if(count($schedules) > 0){
+
+        }
+
         $data = array(
             'deleted_at' => date('Y-m-d H:i:s')
         );
@@ -43,5 +48,22 @@ class StudentModel extends CI_Model
 
         return $this->db->update('students',$data, $where);
     }
+
+    public function checkHasSchedule($id)
+    {
+        return $this->db->select('student_schedules.id AS `schedule_id`')->from('student_schedules')
+        ->where('student_schedules.deleted_at', NULL)
+        ->where('student_id', $id)
+        ->get()->result_array();
+    }
+
+    // public function checkHasExam($schedule_id)
+    // {
+    //     return $this->db->select('exam_schedules.id AS `exam_id`')->from('student_schedules')
+    //     ->join('exam_schedules', 'student_schedules.id = exam_schedules.student_schedule_id')
+    //     ->where('exam_schedules.deleted_at', NULL)
+    //     ->where('student_schedules.id', $schedule_id)
+    //     ->get()->result_array();
+    // }
 }
 ?>

@@ -151,12 +151,18 @@ class Student extends CI_Controller
 
 	public function destroy($id)
 	{
-		if($this->StudentModel->deleteStudent($id)){
-			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student </div>');
+		$child = $this->StudentModel->checkHasSchedule($id);
+        if(count($child) > 0){
+			$this->session->set_flashdata('message','<div class="alert alert-warning" role="alert"> Failed to delete student! Some subject has been registered to this student! </div>');
 		}
 		else{
-			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete student </div>');
+			if($this->StudentModel->deleteStudent($id)){
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert"> Successfully delete student </div>');
+			}
+			else{
+				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete student </div>');
+			}
 		}
-		return $this->index();
+		redirect('admin/student/index');
 	}
 }

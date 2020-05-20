@@ -30,7 +30,7 @@
                             <label for="example-month-input2" class="col-2 col-form-label">Exam Type</label>
                             <div class="col-10">
                                 <select class="custom-select col-12" id="exam_type" name="exam_type" value="<?= set_value('exam_type')?>" required>
-                                    <option selected="">Choose Subject...</option>
+                                    <option selected="" value="">Choose Subject...</option>
                                     <option value="1" <?php if($exam['exam_type'] == "1" ){ echo "selected";}else{}?>>Midterm Exam</option>
                                     <option value="2" <?php if($exam['exam_type'] == "2" ){ echo "selected";}else{}?>>Final Exam</option>
                                 </select>

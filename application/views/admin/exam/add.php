@@ -19,7 +19,7 @@
                             <label for="example-month-input2" class="col-2 col-form-label">Subject</label>
                             <div class="col-10">
                                 <select class="custom-select col-12" id="subject" name="subject" value="<?= set_value('subject')?>" required>
-                                    <option selected="">Choose Subject...</option>
+                                    <option selected="" value="">Choose Subject...</option>
                                     <?php
                                     foreach($subjects as $subject){ ?>
                                     <option value="<?= $subject['id']?>"><?= $subject['subject']?></option>
@@ -31,7 +31,7 @@
                             <label for="example-month-input2" class="col-2 col-form-label">Exam Type</label>
                             <div class="col-10">
                                 <select class="custom-select col-12" id="exam_type" name="exam_type" value="<?= set_value('exam_type')?>" required>
-                                    <option selected="">Choose Subject...</option>
+                                    <option selected="" value="">Choose Subject...</option>
                                     <option value="1">Midterm Exam</option>
                                     <option value="2">Final Exam</option>
                                 </select>

@@ -109,7 +109,7 @@ class Faculty extends CI_Controller
 	{
 		$child = $this->FacultyModel->checkHasChild($id);
         if(count($child) > 0){
-			$this->session->set_flashdata('message','<div class="alert alert-warning" role="alert"> Failed to delete faculty! Some study program currently being registered to student(s)! </div>');            
+			$this->session->set_flashdata('message','<div class="alert alert-warning" role="alert"> Failed to delete faculty! Some study program currently being registered to this faculty </div>');
 		}
 		else{
 			if($this->FacultyModel->deleteFaculty($id)){
@@ -119,6 +119,6 @@ class Faculty extends CI_Controller
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert"> Failed to delete faculty </div>');
 			}
 		}
-		return $this->index();
+		redirect('admin/faculty/index');
 	}
 }
