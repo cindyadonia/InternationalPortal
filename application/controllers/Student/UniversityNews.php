@@ -32,6 +32,6 @@ class UniversityNews extends CI_Controller
     {
         $data['title'] = 'View News';
 		$data['news'] = $this->NewsModel->getNews($id);
-		$this->loadLayout('index', $data);
+		$this->loadLayout('view', $data);
 	}
 }
