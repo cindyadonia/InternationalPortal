@@ -33,9 +33,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-4 col-xs-12">
-                                    <img class="card-img-top img-responsive" src="<?= base_url('uploads/news/'.$news['file_path'])?>" alt="Card image cap">
+                                <?php if($news['file_path'] != NULL):?>
+                                <div class="col-sm-3 col-xs-12">
+                                    <img class="card-img-top img-responsive" src="<?=base_url('uploads/news/'.$news['file_path'])?>" alt="Card image cap">
                                 </div>
+                                <?php endif;?>
                                 <div class="col-sm-8 col-xs-12">
                                     <h4 class="card-title"><?= $news['title']?></h4>
                                     <p class="text-secondary"><?= date('d M Y',strtotime($news['created_at']))?> by <?= $news['author']?></p>

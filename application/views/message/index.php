@@ -24,7 +24,7 @@
         </div>
         <div class="right-part">
             <div class="text-center" style="margin-top:30%">
-                <h4>Choose an Admin to start a chat</h4>
+                <h4>Choose <?php if($_SESSION['role_id'] == 1){echo "a Student";}else{echo "an Admin";}?> to start a chat</h4>
             </div>
         </div>
 
