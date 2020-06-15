@@ -32,7 +32,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($midterms as $midterm):?>
+                                <?php if(count($midterms) > 0){
+                                foreach($midterms as $midterm):?>
                                 <tr>
                                     <td><?= $midterm['class'];?></td>
                                     <td><?= $midterm['name'];?></td>
@@ -40,7 +41,9 @@
                                     <td><?= $midterm['timeandlocation'];?></td>
                                     <td><?= $midterm['table_no'];?></td>
                                 </tr>
-                                <?php endforeach;?>
+                                <?php endforeach;} else { ?>
+                                    <td colspan="5" style="text-align:center"> You don't have any midterm exam right now.</td>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -63,7 +66,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($finals as $final):?>
+                                <?php if(count($finals) > 0){
+                                foreach($finals as $final):?>
                                 <tr>
                                     <td><?= $final['class'];?></td>
                                     <td><?= $final['name'];?></td>
@@ -71,7 +75,9 @@
                                     <td><?= $final['timeandlocation'];?></td>
                                     <td><?= $final['table_no'];?></td>
                                 </tr>
-                                <?php endforeach;?>
+                                <?php endforeach;} else { ?>
+                                    <td colspan="5" style="text-align:center"> You don't have any final exam right now.</td>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
