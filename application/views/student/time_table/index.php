@@ -30,7 +30,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($schedules as $schedule):?>
+                                <?php if(count($schedules) > 0){
+                                foreach($schedules as $schedule):?>
                                 <tr>
                                     <td><?= $schedule['class'];?></td>
                                     <td><?= $schedule['name'];?></td>
@@ -38,7 +39,9 @@
                                     <td><?= $schedule['lecturer'];?></td>
                                     <td><?= $schedule['credits'];?></td>
                                 </tr>
-                                <?php endforeach;?>
+                                <?php endforeach;} else { ?>
+                                    <td colspan="5" style="text-align:center"> You don't have any schedules right now.</td>
+                                <?php } ?>
                                 <tr>
                                     <td colspan="3"> </td>
                                     <td class="font-weight-bolder"> Total Credits </td>
