@@ -7,13 +7,6 @@
                 <h4>Chat Sidebar</h4>
             </div>
             <div class="scrollable position-relative" style="height:100%;">
-                <div class="p-15">
-                    <h5 class="card-title">Search Contact</h5>
-                    <form>
-                        <input class="form-control" type="text" placeholder="Search Contact">
-                    </form>
-                </div>
-                <hr>
                 <ul class="mailbox list-style-none">
                     <li>
                         <div class="message-center chat-scroll">
